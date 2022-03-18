@@ -2,6 +2,27 @@ import java.util.*;
 
 public class MaxSubArray {
     
+    //Maximum Sum Subarray of size K | Sliding Window
+    public static int maxSubArraySlidingW(int[] arr,int k){
+        int result = Integer.MIN_VALUE;
+        int i=0,j=0;
+        int size = arr.length;
+        int currSum=0;
+        //j-i+1 currWindow Size
+        while(j<size){
+            currSum += arr[j];
+            if((j-i+1)<k){
+                j++;
+            }else if((j-i+1)==k){
+                result = Math.max(result,currSum);
+                currSum -= arr[i];
+                i++;
+                j++;
+            }
+
+        }   
+        return result;
+    }
 
 
     //Brute Force O(n^2)
