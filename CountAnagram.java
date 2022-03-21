@@ -97,7 +97,7 @@ public class CountAnagram {
 
     public static void main(String[] args) {
 
-        System.out.println(countAnagram("forxxorf", "for"));
+        System.out.println(countAnagram("forfxxorf", "for"));
 
     }
 }
