@@ -2,7 +2,7 @@ import java.util.*;
 
 public class DistinctCountWindow {
 
-    //Get Distinct elements in specific window
+    // Get Distinct elements in specific window
     public static void getDis(int[] arr, int k) {
         int n = arr.length;
 
@@ -18,7 +18,7 @@ public class DistinctCountWindow {
 
             // Remove the previous element count for the next window
             // And add the new element arr[j] in map
-            if (arr[j - k] == 1) {
+            if (map.get(arr[j - k]) == 1) {
                 map.remove(arr[j]);
             } else {
                 map.put(arr[j - k], map.getOrDefault(arr[j - k], 0) - 1);
@@ -30,27 +30,25 @@ public class DistinctCountWindow {
     }
 
     // Count distinct pairs with difference k
-    public static int TotalPairs(int[] nums, int k)
-    {
+    public static int TotalPairs(int[] nums, int k) {
         // Code here
-        Set<List<Integer>> result =new HashSet<>();
-    //    int currDiff=0;
-        int n=nums.length;
-        
-        
-        for(int i=0;i<n;i++){
+        Set<List<Integer>> result = new HashSet<>();
+        // int currDiff=0;
+        int n = nums.length;
+
+        for (int i = 0; i < n; i++) {
             int start = nums[i];
-            int j=i+1;
-            while(j<n){
+            int j = i + 1;
+            while (j < n) {
                 int currDiff = nums[j] - start;
-                if(currDiff==k){
-                    result.add(Arrays.asList(nums[j],nums[i]));
+                if (currDiff == k) {
+                    result.add(Arrays.asList(nums[j], nums[i]));
                 }
                 j++;
             }
-        
+
         }
-        
+
         // List<Integer> s = set
         // for(){
 
@@ -61,8 +59,12 @@ public class DistinctCountWindow {
 
     public static void main(String[] args) {
 
-        int[] arr = {11, 6, 10, 5, 11, 16};
-        int res2= TotalPairs(arr,5);
+        int[] arr = { 11, 6, 10, 5, 11, 16 };
+        int[] arr1 = { 1, 2, 2, 1, 3, 1, 1, 3 };
+
+        getDis(arr1, 4);
+
+        int res2 = TotalPairs(arr, 5);
         System.out.println(res2);
         System.out.println("HASLJD");
     }
