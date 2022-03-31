@@ -26,9 +26,6 @@ public class BasicRecursion {
 
      public static void getOccurance(String s,int index,char element){
 
-
-
-
         
         if(index==s.length()){
             System.out.println(first);

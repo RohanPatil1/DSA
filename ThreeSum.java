@@ -17,7 +17,7 @@ public class ThreeSum {
             while(low<high){
                 int sum = arr[low]+arr[high];
                 int target = -start;
-                if(sum==target){
+                if(sum == target){
                     return true;
                 }else if(sum>target){
                     high--;
