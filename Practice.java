@@ -397,6 +397,53 @@ public class Practice {
         System.out.println("Count Of Anagrams : " + result);
     }
 
+    public static void countAnaagram(String s, String ptn) {
+
+        int result = 0;
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < ptn.length(); i++) {
+            map.put(ptn.charAt(i), map.getOrDefault(ptn.charAt(i), 0) + 1);
+        }
+
+        int i = 0;
+        int j = 0;
+        int k = ptn.length();
+        int countX = map.size();
+
+        while (j < s.length()) {
+            char jChar = s.charAt(j);
+            if (map.containsKey(jChar)) {
+                map.put(jChar, map.get(jChar) - 1);
+                if (map.get(jChar) == 0) {
+                    countX--;
+                }
+            }
+
+            if ((j - i + 1) < k) {
+                j++;
+            } else if ((j - i + 1) == k) {
+                if (countX == 0) {
+                    result += 1;
+                }
+                // Remove Calculation for i
+                char iChar = s.charAt(i);
+                if (map.containsKey(iChar)) {
+                    map.put(iChar, map.get(iChar) + 1);
+                    if (map.get(iChar) == 1) {
+                        countX++;
+                    }
+                }
+                i++;
+                j++;
+
+            }
+
+        }
+
+        System.out.println("Count Of Anagrams : " + result);
+    }
+
     public static void main(String[] args) {
 
         // ThreeSUM a+b+c=0
@@ -447,7 +494,7 @@ public class Practice {
         // distinctInWindow(new int[] { 1, 2, 2, 1, 3, 1, 1, 3 }, 4);
 
         // Count of anagrams
-        countAnagram("forxsdfadorf", "for");
+        countAnaagram("forxsdfadorf", "for");
     }
 
 }
