@@ -99,8 +99,8 @@ public class ShortestCommonSubSeq {
     }
 
     public static void main(String[] args) {
-        String x = "AGGTAB";
-        String y = "GXTXAYB";
+        String x = "dcba";
+        String y = "abcd";
         System.out.println(printSCS(x, y, x.length(), y.length()));
     }
 }
