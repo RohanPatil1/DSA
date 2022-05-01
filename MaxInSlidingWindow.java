@@ -54,13 +54,13 @@ public class MaxInSlidingWindow {
         return result;
     }
 
+  
     public static void main(String[] args) {
 
-        int[] arr = { 1, 2, 3, 1, 4, 5, 2, 3, 6 };
-        ArrayList<Integer> res = getMaxs(arr, 3);
-        for (int i = 0; i < res.size(); i++) {
-            System.out.print(res.get(i) + " ");
-        }
+        int[] arr = { 7,2,4 };
+        ArrayList<Integer> res = getMaxs(arr, 2);
+        System.out.println(res.toString());
+
 
     }
 }
