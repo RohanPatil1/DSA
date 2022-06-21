@@ -2,12 +2,12 @@ import java.util.*;
 
 
 class MyPair {
-    int diff;
-    int ele;
+    int a;
+    int b;
 
     MyPair(int a, int b) {
-        this.diff = a;
-        this.ele = b;
+        this.a = a;
+        this.b = b;
     }
 
 
@@ -27,8 +27,8 @@ class CPair {
 class CustomCComparator implements Comparator<MyPair> {
     @Override
     public int compare(MyPair p1, MyPair p2) {
-        int num1 = p1.diff;
-        int num2 = p2.diff;
+        int num1 = p1.a;
+        int num2 = p2.a;
 
         if (num2 > num1) {
             return 1;
@@ -378,7 +378,7 @@ public class Practice2 {
 
         //Get The K elements
         while (!pq.isEmpty()) {
-            System.out.println(pq.poll().ele);
+            System.out.println(pq.poll().b);
         }
 
     }
@@ -987,12 +987,7 @@ public class Practice2 {
 
 
 
-
-
     public static void main(String[] args) {
-
-
-
 
 
 //        String s = "geeksforgeek";

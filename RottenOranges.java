@@ -23,8 +23,8 @@ public class RottenOranges {
         q.offer(new MyPair(-1, -1)); //Divider
 
         while (!q.isEmpty()) {
-            int i = q.peek().diff;
-            int j = q.peek().ele;
+            int i = q.peek().a;
+            int j = q.peek().b;
 
             if (i == -1 && j == -1 && q.size() == 1) {
                 q.poll();
