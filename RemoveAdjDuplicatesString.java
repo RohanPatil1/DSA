@@ -1,0 +1,43 @@
+import java.util.Stack;
+
+public class RemoveAdjDuplicatesString {
+
+
+    //if k times repeat, remove
+    public static String removeAdjDupl(String str, int k) {
+        String res = "";
+        Stack<CPair> stack = new Stack<>();
+
+
+        for (int i = 0; i < str.length(); i++) {
+            char curr = str.charAt(i);
+            if (stack.isEmpty()) {
+                stack.push(new CPair(curr, 1));
+            } else {
+
+                if (stack.peek().c != curr) {
+                    stack.push(new CPair(curr, 1));
+                } else {
+                    stack.peek().f++;
+                    if (stack.peek().f == k) {
+                        stack.pop();
+                    }
+
+                }
+            }
+        }
+
+
+        while (!stack.isEmpty()) {
+            while(stack.peek().f!=0){
+                res += stack.peek().c;
+                stack.peek().f--;
+            }
+            stack.pop();
+        }
+        return res;
+    }
+    public static void main(String[] args) {
+        System.out.println(removeAdjDupl("deeedbbcccbdaa",3));
+    }
+}

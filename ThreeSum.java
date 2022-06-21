@@ -6,6 +6,38 @@ import java.util.ArrayList;
 public class ThreeSum {
 
 
+    public static List<List<Integer>> threeSum(int[] arr,int sum) {
+        Set<List<Integer>> resultSet = new HashSet();
+        Arrays.sort(arr);
+
+        int n = arr.length;
+        for (int i = 0; i < n - 2; i++) {
+            int curr = arr[i];
+            int start = i + 1;
+            int end = n - 1;
+            while (start < end) {
+                int currSum = curr + arr[start] + arr[end];
+                if (currSum == sum) {
+                    System.out.println("GOT SOMETHING");
+                    List<Integer> tempL = new ArrayList<>();
+                    tempL.add(arr[i]);
+                    tempL.add(arr[start]);
+                    tempL.add(arr[end]);
+                    resultSet.add(tempL);
+                    start++;
+                    end--;
+                } else if (currSum > 0) {
+                    end--;
+                } else {
+                    start++;
+                }
+
+            }
+        }
+
+        return new ArrayList(resultSet);
+
+    }
     public static boolean findTriplets(int arr[] , int n)
     {
         //add code here.

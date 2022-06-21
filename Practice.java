@@ -148,32 +148,31 @@ public class Practice {
     }
 
     // ThreeSum a+b+c=0
-    public static List<List<Integer>> threeSum(int[] nums) {
+    public static List<List<Integer>> threeSum(int[] arr) {
         Set<List<Integer>> resultSet = new HashSet();
-        Arrays.sort(nums);
+        Arrays.sort(arr);
 
-        int n = nums.length;
+        int n = arr.length;
         for (int i = 0; i < n - 2; i++) {
-            int low = i + 1;
-            int high = n - 1;
-            int a = nums[i];
-
-            // Find the remaining two pairs
-            while (low < high) {
-                int sum = nums[low] + nums[high];
-                int target = -a;
-                if (sum == target) {
-                    resultSet.add(Arrays.asList(a, nums[low], nums[high]));
-                    low++;
-                    high--;
-                } else if (sum > target) {
-                    high--;
+            int curr = arr[i];
+            int start = i + 1;
+            int end = n - 1;
+            while (start < end) {
+                int currSum = curr + arr[start] + arr[end];
+                if (currSum == 0) {
+                    List<Integer> tempL = new ArrayList<>();
+                    tempL.add(i);
+                    tempL.add(start);
+                    tempL.add(end);
+                    start++;
+                    end--;
+                } else if (currSum > 0) {
+                    end--;
                 } else {
-                    low++;
+                    start++;
                 }
 
             }
-
         }
 
         return new ArrayList(resultSet);
@@ -444,20 +443,70 @@ public class Practice {
         System.out.println("Count Of Anagrams : " + result);
     }
 
+    public static ArrayList<Integer> twoSum(int[] arr, int sum) {
+        ArrayList<Integer> result = new ArrayList<>();
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        int i = 0;
+        for (int x : arr) {
+            map.put(x, i++);
+        }
+
+        //get sum
+        for (i = 0; i < arr.length; i++) {
+            int curr = arr[i];
+            int compl = sum - curr;
+            if (map.containsKey(compl)) {
+                result.add(i);
+                result.add(map.get(compl));
+            }
+        }
+
+        return result;
+    }
+
+    public static ArrayList<Integer> twoSum2(int[] arr, int sum) {
+        ArrayList<Integer> result = new ArrayList<>();
+
+        int n = arr.length;
+        Arrays.sort(arr);
+        int start = 0;
+        int end = n - 1;
+        while (start < end) {
+            int currSum = arr[start] + arr[end];
+            if (currSum == sum) {
+                result.add(start);
+                result.add(end);
+                start++;
+                end--;
+            } else if (currSum > sum) {
+                end--;
+            } else {
+                start++;
+            }
+        }
+
+
+        return result;
+    }
+
     public static void main(String[] args) {
 
+
+        int[] myA = new int[]{2, 7, 11, 15};
+        System.out.println(twoSum2(myA, 9).toString());
+
         // ThreeSUM a+b+c=0
-        int[] arr = new int[] { 60, -65, 5, -21, 8, 93 };
+        int[] arr = new int[]{60, -65, 5, -21, 8, 93};
         List<List<Integer>> result = threeSum(arr);
         System.out.println(result.toString());
 
         // ThreeSUM a+b+c=k
-        int[] arr2 = new int[] { 1, 4, 1, 5 };
+        int[] arr2 = new int[]{1, 4, 1, 5};
         List<List<Integer>> result2 = threeSumOfk(arr2, 6);
         System.out.println(result2.toString());
 
         // QUICK SORT
-        int[] arr3 = { 10, 7, 8, 9, 1, 5 };
+        int[] arr3 = {10, 7, 8, 9, 1, 5};
         int n = arr3.length;
 
         quickSort(arr3, 0, n - 1);
@@ -474,11 +523,11 @@ public class Practice {
         revStr("jio", 2);
 
         // Get Subarry
-        getSubArrayWithSumK(new int[] { 1, 2, 3, 7, 5 }, 12);
+        getSubArrayWithSumK(new int[]{1, 2, 3, 7, 5}, 12);
 
         System.out.println();
         // Largest Subarray with equal nos of 1 0
-        getSubArrayWithEqual(new int[] { 0, 0, 1, 0, 1, 0 });
+        getSubArrayWithEqual(new int[]{0, 0, 1, 0, 1, 0});
 
         // Commom Substring
         ArrayList<String> strs = new ArrayList<String>();
