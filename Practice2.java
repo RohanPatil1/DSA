@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.*;
 
 
@@ -985,10 +986,97 @@ public class Practice2 {
     }
 
 
+    static Queue<Integer> pq1 = new LinkedList<>();
+//    static Queue<Double> pq2 = new LinkedList<>();
+//    static double currM = 0;
+//    //Function to insert heap.
+//    public static void insertHeap(int x) {
+//        // add your code here
+//        pq1.add(x);
+//    }
+//
+//    //Function to balance heaps.
+//    public static void balanceHeaps() {
+//        // add your code here
+//        int n = pq1.size();
+//        int[] a = new int[n];
+//        int i = 0;
+//        while (!pq1.isEmpty()) {
+//            a[i++] = pq1.poll();
+//        }
+//
+//    }
 
+    //Function to return Median.
+//    public static double getMedian() {
+//        // add your code here
+//
+//        double ans = findMedian()
+////        if (pq2.isEmpty()) {
+////            pq2.add(Double.valueOf(pq1.peek()));
+////            return pq1.poll();
+////        } else {
+////            int prev = pq1.poll();
+////            double currM = pq2.poll();
+////            double newM = (prev + currM) / 2;
+////            pq2.add(newM);
+////            return newM;
+////        }
+//
+//    }
+
+    public static void printArr(int[] a) {
+        System.out.println("-");
+        for (int i = 0; i < a.length; i++) {
+            System.out.print(a[i] + " ");
+        }
+    }
+
+    public static double findMedian(int a[], int n) {
+        // printArr(a);
+        System.out.println("-");
+        // First we sort the array
+        Arrays.sort(a);
+
+        // check for even case
+        if (n % 2 != 0)
+            return a[n / 2];
+
+        return (a[(n - 1) / 2] + a[n / 2]) / 2;
+    }
+
+    public static void getANS(int A[], int N) {
+        double currM = 0;
+        int k = 0;
+        while (N != 0) {
+            int curr = A[k++];
+
+            pq1.add(curr);
+            System.out.println(pq1.toString());
+            int n = pq1.size();
+            int[] a = new int[n];
+            int i = 0;
+//            while (n!=0) {
+//                a[i++] = pq1.peek();
+//                n--;
+//            }
+            for (Integer item : pq1) {
+                a[i++] = item;
+            }
+            double m = findMedian(a, pq1.size());
+            DecimalFormat format = new DecimalFormat("0.#");
+
+            currM =m;
+            System.out.println((int) Math.floor(currM));
+            a = null;
+            N--;
+        }
+    }
 
     public static void main(String[] args) {
 
+
+        getANS(new int[]{5, 15, 1, 3}, 4);
 
 //        String s = "geeksforgeek";
 //        Queue<Integer> q = new LinkedList<>();
