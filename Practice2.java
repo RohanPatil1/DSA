@@ -14,6 +14,7 @@ class MyPair {
 
 }
 
+
 class CPair {
     char c;
     int f;
@@ -22,6 +23,19 @@ class CPair {
         this.c = c;
         this.f = f;
     }
+
+}
+
+class CustomCComparator2 implements Comparator<MyPair> {
+    @Override
+    public int compare(MyPair p1, MyPair p2) {
+        int num1 = p1.a;
+        int num2 = p2.a;
+
+
+        return num1 - num2;
+    }
+
 
 }
 
@@ -1066,17 +1080,56 @@ public class Practice2 {
             double m = findMedian(a, pq1.size());
             DecimalFormat format = new DecimalFormat("0.#");
 
-            currM =m;
+            currM = m;
             System.out.println((int) Math.floor(currM));
             a = null;
             N--;
         }
     }
 
+    public static int minPlatform(int[] arr, int[] dept, int n) {
+        PriorityQueue<MyPair> pq = new PriorityQueue<>(new CustomCComparator2());
+        ArrayList<MyPair> list = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            list.add(new MyPair(arr[i], dept[i]));
+        }
+
+        Collections.sort(list, new CustomCComparator2());
+        for (MyPair p : list) {
+            System.out.println(p.a);
+        }
+
+        int platform = 1;
+        //PQ - (Dept-Platform)
+        //List- (Arr-Dept)
+        pq.offer(new MyPair(list.get(0).b, platform));
+
+        for (int i = 1; i < n; i++) {
+            MyPair currT = list.get(i);
+
+            if (currT.a >= pq.peek().a) {
+                int samePlatform = pq.peek().b;
+                pq.poll();
+                pq.offer(new MyPair(currT.b, samePlatform));
+            } else {
+                //Need new platform - Prev dept is greater than next arrival
+                platform++;
+                pq.offer(new MyPair(currT.b, platform));
+            }
+
+        }
+
+
+        return platform;
+    }
+
+
     public static void main(String[] args) {
 
+        System.out.println(minPlatform(new int[]{1, 2, 6, 8}, new int[]{5, 9, 7, 10}, 4));
 
-        getANS(new int[]{5, 15, 1, 3}, 4);
+//        getANS(new int[]{5, 15, 1, 3}, 4);
 
 //        String s = "geeksforgeek";
 //        Queue<Integer> q = new LinkedList<>();
