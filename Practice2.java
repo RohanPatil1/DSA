@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -1125,9 +1128,89 @@ public class Practice2 {
     }
 
 
-    public static void main(String[] args) {
+    public static int checkAnagram(char[] str1,char[] str2) {
 
-        System.out.println(minPlatform(new int[]{1, 2, 6, 8}, new int[]{5, 9, 7, 10}, 4));
+        int n1 = str1.length;
+        int n2 = str2.length;
+        int flag = 0;
+
+        if (n1 != n2)
+            return 0;
+
+        Arrays.sort(str1);
+        Arrays.sort(str2);
+
+        for (int i = 0; i < n1; i++) {
+            if (str1[i] != str2[i]){
+                return 0;
+            }
+        }
+
+        return flag;
+    }
+
+    public static void main(String[] args) throws IOException {
+
+
+        Scanner sc = new Scanner(System.in);
+        String[] input = new String[2];
+        String string1, string2;
+        input = sc.nextLine().split(" ");
+        string1= input[0];
+        string2= input[1];
+
+
+        char[] str1 = string1.toCharArray();
+        char[] str2 = string2.toCharArray();
+
+        int result =checkAnagram(str1,str2);
+        System.out.println(result);
+//
+
+
+        int number =1234;
+        int ans = 0;
+        while (number > 0) {
+            int currDigit = number % 10;
+            if(currDigit%2==0 ){
+                ans += currDigit;
+            }
+            number = number / 10;
+        }
+        System.out.println(ans);
+
+
+
+//
+//        Scanner sc = new Scanner(System.in);
+//        String string1 = sc.nextLine();
+//        String string2 = sc.nextLine();
+//
+//        char[] str1 = string1.toCharArray();
+//        char[] str2 = string2.toCharArray();
+//
+//        int n1 = str1.length;
+//        int n2 = str2.length;
+//        int flag = 0;
+//
+//        if (n1 != n2)
+//            flag = 0;
+//
+//        Arrays.sort(str1);
+//        Arrays.sort(str2);
+//
+//        for (int i = 0; i < n1; i++) {
+//            if (str1[i] != str2[i])
+//                flag = 0;
+//
+//        }
+
+//        flag = 1;
+//        System.out.println(flag);
+
+
+//        System.out.println(sumOfEven());
+        //System.out.println(minPlatform(new int[]{1, 2, 6, 8}, new int[]{5, 9, 7, 10}, 4));
 
 //        getANS(new int[]{5, 15, 1, 3}, 4);
 
