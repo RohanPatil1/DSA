@@ -1128,7 +1128,7 @@ public class Practice2 {
     }
 
 
-    public static int checkAnagram(char[] str1,char[] str2) {
+    public static int checkAnagram(char[] str1, char[] str2) {
 
         int n1 = str1.length;
         int n2 = str2.length;
@@ -1141,12 +1141,37 @@ public class Practice2 {
         Arrays.sort(str2);
 
         for (int i = 0; i < n1; i++) {
-            if (str1[i] != str2[i]){
+            if (str1[i] != str2[i]) {
                 return 0;
             }
         }
 
         return flag;
+    }
+
+
+    public static String findOverlappingWord(List<String> lines, String foldAfter, String word) {
+
+
+        int fIndex = 0;
+        for (int i = 0; i < lines.size(); i++) {
+            if (lines.get(i).equals(foldAfter)) {
+                fIndex = i;
+            }
+        }
+
+
+        int wIndex = 0;
+        for (int i = 0; i < lines.size(); i++) {
+            if (lines.get(i).equals(word)) {
+                wIndex = i;
+            }
+        }
+
+        int resultIndex = wIndex - fIndex;
+        return lines.get(resultIndex);
+
+
     }
 
     public static void main(String[] args) throws IOException {
@@ -1156,29 +1181,28 @@ public class Practice2 {
         String[] input = new String[2];
         String string1, string2;
         input = sc.nextLine().split(" ");
-        string1= input[0];
-        string2= input[1];
+        string1 = input[0];
+        string2 = input[1];
 
 
         char[] str1 = string1.toCharArray();
         char[] str2 = string2.toCharArray();
 
-        int result =checkAnagram(str1,str2);
+        int result = checkAnagram(str1, str2);
         System.out.println(result);
 //
 
 
-        int number =1234;
+        int number = 1234;
         int ans = 0;
         while (number > 0) {
             int currDigit = number % 10;
-            if(currDigit%2==0 ){
+            if (currDigit % 2 == 0) {
                 ans += currDigit;
             }
             number = number / 10;
         }
         System.out.println(ans);
-
 
 
 //
