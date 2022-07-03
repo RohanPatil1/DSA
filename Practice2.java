@@ -1174,38 +1174,57 @@ public class Practice2 {
 
     }
 
-    
+
+    public static int[] reverseSort (int[] arr) {
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] *=-1;
+        }
+        Arrays.sort(arr);
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] *=-1;
+        }
+
+
+        return arr;
+    }
 
     public static void main(String[] args) throws IOException {
 
-
-        Scanner sc = new Scanner(System.in);
-        String[] input = new String[2];
-        String string1, string2;
-        input = sc.nextLine().split(" ");
-        string1 = input[0];
-        string2 = input[1];
-
-
-        char[] str1 = string1.toCharArray();
-        char[] str2 = string2.toCharArray();
-
-        int result = checkAnagram(str1, str2);
-        System.out.println(result);
-//
-
-
-        int number = 1234;
-        int ans = 0;
-        while (number > 0) {
-            int currDigit = number % 10;
-            if (currDigit % 2 == 0) {
-                ans += currDigit;
-            }
-            number = number / 10;
+int[] arr =new int[]{8,12,32,1,0,82,7};
+        reverseSort(arr);
+        for(int a:arr){
+            System.out.print(a+" ");
         }
-        System.out.println(ans);
 
+//        Scanner sc = new Scanner(System.in);
+//        String[] input = new String[2];
+//        String string1, string2;
+//        input = sc.nextLine().split(" ");
+//        string1 = input[0];
+//        string2 = input[1];
+//
+//
+//        char[] str1 = string1.toCharArray();
+//        char[] str2 = string2.toCharArray();
+//
+//        int result = checkAnagram(str1, str2);
+//        System.out.println(result);
+////
+//
+//
+//        int number = 1234;
+//        int ans = 0;
+//        while (number > 0) {
+//            int currDigit = number % 10;
+//            if (currDigit % 2 == 0) {
+//                ans += currDigit;
+//            }
+//            number = number / 10;
+//        }
+//        System.out.println(ans);
+//
 
 //
 //        Scanner sc = new Scanner(System.in);
