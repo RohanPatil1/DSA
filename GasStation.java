@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-
-class Pair implements Comparable<Pair> {
+class Pair implements Comparable<WPair> {
     int petrol, dist;
 
     public Pair(int petrol, int dist) {
@@ -10,7 +7,7 @@ class Pair implements Comparable<Pair> {
     }
 
     @Override
-    public int compareTo(Pair o) {
+    public int compareTo(WPair o) {
         return this.dist - o.dist;
     }
 }

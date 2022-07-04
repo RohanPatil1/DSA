@@ -1,10 +1,8 @@
-import java.util.Comparator;
-
-class Pair {
+class WPair {
     int value;
     int index;
 
-    public Pair(int value, int index) {
+    public WPair(int value, int index) {
         this.value = value;
         this.index = index;
     }
@@ -16,15 +14,15 @@ public class GergoviaWineTrading {
     public static int getMinSteps(int[] arr, int n) {
         int steps = 0;
 
-        Pair[] buy = new Pair[n];
-        Pair[] sell = new Pair[n];
+        WPair[] buy = new WPair[n];
+        WPair[] sell = new WPair[n];
         int i = 0, j = 0;
 
         for (int k = 0; k < n; k++) {
             if (arr[i] > 0) {
-                buy[i] = new Pair(arr[i], i);
+                buy[i] = new WPair(arr[i], i);
             } else if (arr[i] < 0) {
-                sell[i] = new Pair(arr[i], i);
+                sell[i] = new WPair(arr[i], i);
             }
         }
 
