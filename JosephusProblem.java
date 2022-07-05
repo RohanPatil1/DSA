@@ -1,6 +1,23 @@
 import java.util.*;
 
 public class JosephusProblem {
+
+    //Follows 0-based indexing
+    int josephusA2Helper(int n,int k ){
+        if(n==1) return 0;
+
+
+        int ans = josephusA2(n-1,k);
+
+        return (ans+k)&n;
+
+    }
+    int josephusA2(int n,int k){
+        //Ans should be 1-base indexing
+        int ans = josephusA2Helper(n,k);
+        return ans+1;
+    }
+
     static int safePos(int n, int k) {
         // code here
         k--;
