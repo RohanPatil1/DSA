@@ -1,13 +1,13 @@
-class Pair implements Comparable<WPair> {
+class PairG implements Comparable<PairG> {
     int petrol, dist;
 
-    public Pair(int petrol, int dist) {
+    public PairG(int petrol, int dist) {
         this.petrol = petrol;
         this.dist = dist;
     }
 
     @Override
-    public int compareTo(WPair o) {
+    public int compareTo(PairG o) {
         return this.dist - o.dist;
     }
 }
