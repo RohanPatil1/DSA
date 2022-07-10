@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -1175,29 +1173,62 @@ public class Practice2 {
     }
 
 
-    public static int[] reverseSort (int[] arr) {
+    public static int[] reverseSort(int[] arr) {
 
         for (int i = 0; i < arr.length; i++) {
-            arr[i] *=-1;
+            arr[i] *= -1;
         }
         Arrays.sort(arr);
 
         for (int i = 0; i < arr.length; i++) {
-            arr[i] *=-1;
+            arr[i] *= -1;
         }
 
 
         return arr;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static int sumOfDigit(int number) {
+        int digit, sum = 0;
 
-int[] arr =new int[]{8,12,32,1,0,82,7};
-        reverseSort(arr);
-        for(int a:arr){
-            System.out.print(a+" ");
+        while (number > 0) {
+            digit = number % 10;
+            sum = sum + digit;
+            number = number / 10;
         }
 
+        return sum;
+    }
+/*
+12 45 55 62 85 91
+
+5 22 51 55 62 65
+
+ */
+
+    public static void findPublicPrivateKey(int P, int R, int X) {
+
+        int smallest = Integer.MAX_VALUE;
+        int largest = Integer.MIN_VALUE;
+        for (int i = P; i <= R; i++) {
+            int sum = sumOfDigit(i);
+            if(sum==X){
+                smallest = Math.min(smallest,i);
+                largest  = Math.max(largest,i);
+            }
+        }
+
+        System.out.println(smallest);
+        System.out.println(largest);
+    }
+    public static void main(String[] args) throws IOException {
+
+//        int[] arr = new int[]{8, 12, 32, 1, 0, 82, 7};
+//        reverseSort(arr);
+//        for (int a : arr) {
+//            System.out.print(a + " ");
+//        }
+        findPublicPrivateKey(1,55,5);
 //        Scanner sc = new Scanner(System.in);
 //        String[] input = new String[2];
 //        String string1, string2;
