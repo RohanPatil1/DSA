@@ -15,32 +15,30 @@ public class ForestBinarySearch {
     }
 
     public static int forestW(int[] arr, int k) {
-        int start = 0, end = Integer.MIN_VALUE, mid = 0;
+        int start = 0, end = 0, mid = 0;
 
-        // Get Max
-        for (int i = 0; i < arr.length; i++) {
-            end = Math.max(end, arr[i]);
-        }
-
-        while (start < end) {
+        Arrays.sort(arr);
+        end = arr[arr.length-1];
+        while (start <= end) {
             mid = start + (end - start) / 2;
             int currWood = calculateWood(arr, mid);
-            if (currWood == k || start == mid) {
+            if (currWood == k ) {
+                //System.out.println("CurrWood: "+currWood+"  k: "+k);
                 return mid;
             } else if (currWood > k) {
                 // We need less, go up
-                start = mid;
+                start = mid+1;
             } else {
                 // We need more, go down
-                end = mid;
+                end = mid-1;
             }
 
         }
-        return mid;
+        return -1;
 
     }
 
     public static void main(String[] args) {
-        System.out.println(forestW(new int[]{2,3,6,2,4}, 4));
+        System.out.println(forestW(new int[]{56, 75, 89, 20, 99}, 59));
     }
 }

@@ -1212,23 +1212,97 @@ public class Practice2 {
         int largest = Integer.MIN_VALUE;
         for (int i = P; i <= R; i++) {
             int sum = sumOfDigit(i);
-            if(sum==X){
-                smallest = Math.min(smallest,i);
-                largest  = Math.max(largest,i);
+            if (sum == X) {
+                smallest = Math.min(smallest, i);
+                largest = Math.max(largest, i);
             }
         }
 
         System.out.println(smallest);
         System.out.println(largest);
     }
+
+
+    public static int triangleTriplets(int[] arr) {
+        Arrays.sort(arr);
+        int n = arr.length;
+        int i = n - 1;
+        int k = n - 2;
+        int j = 0;
+        int ans = 0;
+        for (i = n - 1; i > 1; i--) {
+            k = i - 1;
+            j = 0;
+            while (k > j) {
+                if (arr[j] + arr[k] > arr[i]) {
+                    ans += (k - j);
+                    k--;
+                } else {
+                    j++;
+                }
+            }
+        }
+        return ans;
+    }
+
+    public static int getPivot(int[] arr) {
+
+        int n = arr.length;
+        int sum = 0;
+        for (int a : arr) sum += a;
+
+        int lSum = 0, rSum = sum;
+
+        for (int i = 0; i < n; i++) {
+
+            rSum = rSum - arr[i];
+            System.out.println("i: " + i + " lSum: " + lSum + " rSum: " + rSum);
+            if (lSum == rSum) return i;
+
+            lSum += arr[i];
+        }
+
+        return -1;
+    }
+
+
+    public static int threeSum(int[] arr, int x) {
+        int n = arr.length;
+
+        int sum = 0;
+
+        int j = 0, k = 0;
+        Arrays.sort(arr);
+        for (int i = 0; i < n; i++) {
+
+            j = i + 1;
+            k = n - 1;
+            while (j < k) {
+                sum = arr[i] + arr[j] + arr[k];
+                if (sum == x) {
+                    return x;
+                } else if (sum > x) {
+                    k--;
+                } else {
+                    j++;
+                }
+            }
+        }
+        return -1;
+    }
+
+
     public static void main(String[] args) throws IOException {
 
+        System.out.println(getPivot(new int[]{1, 0, 1}));
+
+//        System.out.println(triangleTriplets(new int[]{4,6,7,8,9}));
 //        int[] arr = new int[]{8, 12, 32, 1, 0, 82, 7};
 //        reverseSort(arr);
 //        for (int a : arr) {
 //            System.out.print(a + " ");
 //        }
-        findPublicPrivateKey(1,55,5);
+        //    findPublicPrivateKey(1,55,5);
 //        Scanner sc = new Scanner(System.in);
 //        String[] input = new String[2];
 //        String string1, string2;
