@@ -3,12 +3,12 @@
 public class IsCycleInLL {
 
 
-    public static boolean isCycle(ReverseLL.Node head) {
+    public static boolean isCycle( Node head) {
 
         if (head == null || head.next == null) return false;
 
-        ReverseLL.Node slow = head;
-        ReverseLL.Node fast = head;
+         Node slow = head;
+         Node fast = head;
         while (fast.next != null && fast.next.next != null) {
             slow = slow.next;
             fast = fast.next.next;
@@ -18,13 +18,13 @@ public class IsCycleInLL {
         return false;
     }
 
-    public static ReverseLL.Node cycleStartingPoint(ReverseLL.Node head) {
+    public static  Node cycleStartingPoint( Node head) {
 
         if (head == null || head.next == null) return null;
 
-        ReverseLL.Node slow = head;
-        ReverseLL.Node fast = head;
-        ReverseLL.Node entry = head;
+         Node slow = head;
+         Node fast = head;
+         Node entry = head;
         while (fast.next != null && fast.next.next != null) {
             slow = slow.next;
             fast = fast.next.next;

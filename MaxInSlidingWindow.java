@@ -1,11 +1,11 @@
 import java.util.*;
+import java.util.LinkedList;
 
 public class MaxInSlidingWindow {
     // https://www.geeksforgeeks.org/deque-interface-java-example/
 
     public static ArrayList<Integer> getMaxs(int[] arr, int k) {
         ArrayList<Integer> result = new ArrayList<>();
-       
 
         // Store the currMax of the currWindow and pop all the previous elements smaller
         // than arr[k]
