@@ -1,12 +1,22 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class InterleavingStringsDP {
+
+    static Map<String, Boolean> t = new HashMap<>();
 
     public static boolean recursion(String A, String B, String C, int i, int j, int k) {
 
+
         if (k == C.length() && i == A.length() && j == B.length()) return true;
         if (k == C.length()) return false;
+        if (t.containsKey("" + i + j + k)) return t.get("" + i + j + k);
+
         if (i == A.length()) {
             if (C.charAt(k) == B.charAt(j)) {
-                return recursion(A, B, C, i, j + 1, k + 1);
+                boolean ans = recursion(A, B, C, i, j + 1, k + 1);
+                t.put("" + i + j + k, ans);
+                return ans;
             } else {
                 return false;
             }
@@ -14,8 +24,11 @@ public class InterleavingStringsDP {
 
         if (j == B.length()) {
             if (C.charAt(k) == A.charAt(i)) {
-                return recursion(A, B, C, i + 1, j, k + 1);
+                boolean ans = recursion(A, B, C, i + 1, j, k + 1);
+                t.put("" + i + j + k, ans);
+                return ans;
             } else {
+                t.put("" + i + j + k, false);
                 return false;
             }
         }
@@ -23,12 +36,18 @@ public class InterleavingStringsDP {
         if (C.charAt(k) == A.charAt(i) && C.charAt(k) == B.charAt(j)) {
             boolean ans1 = recursion(A, B, C, i + 1, j, k + 1);
             boolean ans2 = recursion(A, B, C, i, j + 1, k + 1);
+            t.put("" + i + j + k, ans1 || ans2);
             return ans1 || ans2;
         } else if (C.charAt(k) == A.charAt(i)) {
-            return recursion(A, B, C, i + 1, j, k + 1);
+            boolean ans  = recursion(A, B, C, i + 1, j, k + 1);
+            t.put("" + i + j + k, ans);
+            return ans;
         } else if (C.charAt(k) == B.charAt(j)) {
-            return recursion(A, B, C, i, j + 1, k + 1);
+            boolean ans = recursion(A, B, C, i, j + 1, k + 1);
+            t.put("" + i + j + k, ans);
+            return ans;
         } else {
+            t.put("" + i + j + k, false);
             return false;
         }
     }

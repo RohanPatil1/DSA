@@ -2,6 +2,37 @@ import java.util.*;
 
 public class LongestRepSubseq {
 
+
+    //BruteForce
+    public static int lrsUsingMap(String A) {
+        int ans = 0;
+        int n = A.length();
+        Map<String, List<Integer>> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                String temp = "" + A.charAt(i) + A.charAt(j);
+
+                if (map.containsKey(temp)) {
+                    int ni = map.get(temp).get(0);
+                    int nj = map.get(temp).get(1);
+                    if (i != ni && j != nj) {
+                        ans++;
+                    }
+
+                } else {
+                    List<Integer> list = new ArrayList<>();
+                    list.add(i);
+                    list.add(j);
+                    map.put(temp, list);
+                }
+            }
+        }
+
+        return ans;
+    }
+
+
+    //A2
     public static int lrs(String s) {
 
         String x = s;
@@ -40,5 +71,6 @@ public class LongestRepSubseq {
 
     public static void main(String[] args) {
         System.out.println(lrs("axxxy"));
+        System.out.println(lrsUsingMap("axxxy"));
     }
 }
