@@ -21,7 +21,32 @@ public class UniquePaths {
         return noOfUqPaths(m, n, 0, 0);
     }
 
-    //A2 -- Using nCr trick
+
+    public static int noOfUqPathsBUP(int n, int m) {
+        t = new int[n][m];
+
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (i == 0 || j == 0) {
+                    t[i][j] = 1;
+                }
+            }
+        }
+
+
+        for (int i = 1; i < n; i++) {
+            for (int j = 1; j < m; j++) {
+                t[i][j] = t[i - 1][j] + t[i][j - 1];
+            }
+        }
+
+
+        return t[n - 1][m - 1];
+    }
+
+
+    //A3 -- Using nCr trick
     public static int nCr(int n, int r) {
 
         int[] C = new int[r + 1];
