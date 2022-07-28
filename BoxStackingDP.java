@@ -36,6 +36,9 @@ public class BoxStackingDP {
         }
 
         Arrays.sort(boxes, new BoxComparator());
+        for (int i = 0; i < boxes.length; i++) {
+            System.out.println("("+boxes[i].l+","+boxes[i].b+","+boxes[i].h+")");
+        }
 
         int[] t = new int[6 * n];
         int maxHeight = Integer.MIN_VALUE;
