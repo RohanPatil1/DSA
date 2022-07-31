@@ -22,6 +22,12 @@ public class BoxStackingDP {
         }
     }
 
+    public static void printBoxes (Box[] arr) {
+        for (Box b:arr){
+            System.out.println("Box("+b.l+","+b.b+","+b.h+")");
+        }
+        System.out.println("");
+    }
 
     public static int maxHeight(int[] ht, int[] w, int[] lt, int n) {
 
@@ -36,9 +42,7 @@ public class BoxStackingDP {
         }
 
         Arrays.sort(boxes, new BoxComparator());
-        for (int i = 0; i < boxes.length; i++) {
-            System.out.println("("+boxes[i].l+","+boxes[i].b+","+boxes[i].h+")");
-        }
+        printBoxes(boxes);
 
         int[] t = new int[6 * n];
         int maxHeight = Integer.MIN_VALUE;
@@ -59,12 +63,19 @@ public class BoxStackingDP {
 
 
     public static void main(String[] args) {
+//        System.out.println(maxHeight(
+//                new int[]{4, 1, 4, 10},
+//                new int[]{6, 2, 5, 12},
+//                new int[]{7, 3, 6, 32},
+//                4
+//        ));
         System.out.println(maxHeight(
-                new int[]{4, 1, 4, 10},
-                new int[]{6, 2, 5, 12},
-                new int[]{7, 3, 6, 32},
-                4
+                new int[]{1},
+                new int[]{2},
+                new int[]{3},
+                1
         ));
+
     }
 
 }

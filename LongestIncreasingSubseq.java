@@ -97,7 +97,7 @@ public class LongestIncreasingSubseq {
         for (int i = 0; i < n; i++) {
             if (ansL.isEmpty()) {
                 ansL.add(arr[i]);
-                } else {
+            } else {
                 int last = ansL.size() - 1;
                 if (ansL.get(last) < arr[i]) {
                     ansL.add(arr[i]);
@@ -105,7 +105,7 @@ public class LongestIncreasingSubseq {
                 } else {
                     int x = lower_bound(ansL, arr[i]);
                     ansL.set(x, arr[i]);
-                    System.out.println("LB"+ansL);
+                    System.out.println("LB" + ansL);
                 }
             }
         }
@@ -117,6 +117,6 @@ public class LongestIncreasingSubseq {
     public static void main(String[] args) {
         System.out.println(lisItr(new int[]{4, 3, 9, 7, 6, 8, 20}, 7));
         System.out.println(lisDP(new int[]{4, 3, 9, 7, 6, 8, 20}, 7));
-        System.out.println(lisNLogN(new int[]{0,8,4,12,2,10,6,14,1,9,5,13,3,11,7,15}, 16));
+        System.out.println(lisNLogN(new int[]{0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15}, 16));
     }
 }
