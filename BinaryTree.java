@@ -40,6 +40,10 @@ public class BinaryTree {
         System.out.print(root.data + " ");
     }
 
+    public static void levelOrderTraversal(BNode root) {
+
+    }
+
     public static BNode buildTree(int[] nodes) {
         index++; //root
         if (nodes[index] == -1) return null;
