@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 class BNode {
     int data;
     BNode left;
@@ -44,6 +47,33 @@ public class BinaryTree {
 
     }
 
+    //BFS - Queue
+    public static void BFS(BNode root) {
+        Queue<BNode> queue = new LinkedList<>();
+
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            BNode node = queue.poll();
+            System.out.print(node.data+" ");
+
+            if (node.left != null) {
+                queue.add(node.left);
+            }
+            if (node.right != null) {
+                queue.add(node.right);
+            }
+        }
+    }
+
+    //DFS
+    public static void DFS (BNode root) {
+        if(root!=null){
+            System.out.print(root.data+" ");
+            DFS(root.left);
+            DFS(root.right);
+        }
+    }
+
     public static BNode buildTree(int[] nodes) {
         index++; //root
         if (nodes[index] == -1) return null;
@@ -66,9 +96,17 @@ public class BinaryTree {
         inOrder(root);
         System.out.println();
 
-        System.out.print("Postorder ");
+        System.out.print("Postorder :");
         postOrder(root);
+        System.out.println();
 
+        System.out.print("BFS :");
+        BFS(root);
+
+        System.out.println();
+
+        System.out.print("DFS :");
+        DFS(root);
     }
 
 }
