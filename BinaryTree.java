@@ -17,7 +17,7 @@ public class BinaryTree {
 
     static int index = -1;
 
-
+    //--------------TRAVERSALS--------------------------------
     public static void preOrder(BNode root) {
         if (root == null) return;
 
@@ -44,7 +44,7 @@ public class BinaryTree {
     }
 
     public static void levelOrderTraversal(BNode root) {
-
+        BFS(root);
     }
 
     //BFS - Queue
@@ -54,7 +54,7 @@ public class BinaryTree {
         queue.add(root);
         while (!queue.isEmpty()) {
             BNode node = queue.poll();
-            System.out.print(node.data+" ");
+            System.out.print(node.data + " ");
 
             if (node.left != null) {
                 queue.add(node.left);
@@ -66,14 +66,15 @@ public class BinaryTree {
     }
 
     //DFS
-    public static void DFS (BNode root) {
-        if(root!=null){
-            System.out.print(root.data+" ");
+    public static void DFS(BNode root) {
+        if (root != null) {
+            System.out.print(root.data + " ");
             DFS(root.left);
             DFS(root.right);
         }
     }
 
+    //--------------BUILD TREE--------------------------------
     public static BNode buildTree(int[] nodes) {
         index++; //root
         if (nodes[index] == -1) return null;
