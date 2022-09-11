@@ -2,6 +2,34 @@ import java.util.*;
 
 public class SubSumArray {
 
+    //Subarray Count  Subarray range with given sum
+    static int subArraySum(int arr[], int n, int s)
+    {
+
+        int result = 0;
+        int currSum = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+
+        map.put(0,1);
+
+        for (int i = 0; i < n; i++) {
+            currSum += arr[i];
+
+
+            if(map.containsKey(currSum - s)){
+                result += map.get(currSum-s);
+            }
+
+            map.put(currSum, map.getOrDefault(currSum,0)+1);
+
+        }
+
+
+
+        return result;
+    }
+
+
     public static ArrayList<Integer> subarraySum(int[] arr, int n, int s) {
         ArrayList<Integer> result = new ArrayList<Integer>();
         // Arrays.sort(arr);
