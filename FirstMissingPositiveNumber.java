@@ -13,17 +13,17 @@ public class FirstMissingPositiveNumber {
             }
         }
 
-        //Get min max
+        //Get min max, if no ans then max+1
         for (int x : nums) {
             min = Math.min(min, x);
             max = Math.max(max, x);
         }
 
-
+//[1,2,0] = > [1,1,1,0]
         int[] freq = new int[n + 1];
 
         for (int i = 0; i < n; i++) {
-            if (nums[i] > n) continue;
+            if (nums[i] > n) continue; // since the missing number will always be in 1 to n
             freq[nums[i]]++;
         }
 

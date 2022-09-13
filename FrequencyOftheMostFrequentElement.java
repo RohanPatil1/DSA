@@ -14,32 +14,42 @@ public class FrequencyOftheMostFrequentElement {
      */
 
 
-
     public int maxFrequency(int[] nums, int k) {
 
-        int i=0,j=0;
+        int i = 0, j = 0;
         int n = nums.length;
         int maxFreq = 0;
 
-        long  currSum = 0;
+        long currSum = 0;
 
-        Arrays.sort(nums);
+        Arrays.sort(nums); // So that we can use least k like [1,1,2,2,4] k=2 Now if want to make 4 the best option is 2 not 1
 
-        while(j<n){
+
+        while (j < n) {
             currSum += nums[j];
+            //WE are trying to make nums[j]
+            //We will keep growing out window from left(i) until budget
 
-            while((long) nums[j]*(j-i+1) > (currSum + k) ){
+            /*
+            i      j
+            [1,1,1,2, 2,4] k=2
+            So we are trying to make [1,1,1,2] to [2,2,2,2]
+            so windowSize*num[j] i.e expected sum if all became 2
+
+            Ans currSum+k is the reality sum which is possible
+             */
+
+            //Not expected? increase i & reduce currSum i.e reduce expectations
+            while ((long) nums[j] * (j - i + 1) > (currSum + k)) {
 
                 currSum -= nums[i];
                 i++;
             }
 
-            maxFreq = Math.max(maxFreq,j-i+1);
+            maxFreq = Math.max(maxFreq, j - i + 1);
             j++;
 
         }
-
-
 
         return maxFreq;
     }

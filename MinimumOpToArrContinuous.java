@@ -1,6 +1,5 @@
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 public class MinimumOpToArrContinuous {
@@ -35,10 +34,14 @@ public class MinimumOpToArrContinuous {
 
         int m = nums.length;
         int res = n;
-        int j = 0;
-        for(int i=0; i<m; i++){
-            while(j<m && nums[j]<=nums[i]+n-1) j++;
-            res = Math.min(res, n-(j-i));
+        int end = 0;
+        for (int start = 0; start < m; start++) {
+            while (end < m && nums[end] <= nums[start] + n - 1) {
+                end++;//Counter of numbers that are in expected continuous
+            }
+            //end - start = Total count of numbers as continuous
+            //n- (end-start) = Not continuous = NEED Op
+            res = Math.min(res, n - (end - start));
         }
         return res;
 
