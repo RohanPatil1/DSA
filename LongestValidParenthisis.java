@@ -1,38 +1,36 @@
 import java.util.*;
 
+//https://youtu.be/SDTdWMuP5a8
 public class LongestValidParenthisis {
 
 
     //Without using 2 stacks just 1 index stack
     public static int validP(String s) {
-        int result = 0;
-        int n = s.length();
-        Stack<Integer> indexS = new Stack<>();
-        indexS.push(-1);
+        int resLen = 0;
+        int n= s.length();
 
-        for (int i = 0; i < n; i++) {
+        Stack<Integer> indexStack = new Stack<>();
+        indexStack.push(-1);
+
+        for(int i=0;i<n;i++){
+
             char curr = s.charAt(i);
-            if (curr == '(') {
-                indexS.push(i);
-            } else {
-                indexS.pop();
-                if (indexS.isEmpty()) {
-                    indexS.push(i);
-                } else {
-                    result = Math.max(result, i - indexS.peek());
+
+            if(curr == '('){
+                indexStack.push(i);
+            }else{
+                indexStack.pop();
+                if(indexStack.isEmpty()){
+                    indexStack.push(i);
+                }else{
+                    resLen = Math.max(resLen , i - indexStack.peek());
                 }
 
-                //                if (!charS.isEmpty() && charS.peek() == '(') {
-//
-//                } else {
-//                    indexS.add(i);
-//                }
+
             }
-
-
         }
 
-        return result;
+        return resLen;
     }
 
     //O(1) space using two pointers
