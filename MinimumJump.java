@@ -1,7 +1,6 @@
 public class MinimumJump {
 
 
-
     public static int minimumJump(int arr[]) {
 
         int n = arr.length;
@@ -19,14 +18,16 @@ public class MinimumJump {
                 return jump;
             }
             reachable = Math.max(reachable, arr[i] + i);
+            System.out.println("i: "+i+"Reachable: " + reachable + " Steps: " + step);
             step--;
             if (step == 0) {
                 jump++;
                 if (i >= reachable) {
+                    System.out.println("NOt Reachable : "+reachable +" i:"+i);
                     return -1;
                 }
                 step = reachable - i;
-
+                System.out.println("Jump: " + jump + " Steps: " + step);
             }
         }
 
@@ -34,7 +35,7 @@ public class MinimumJump {
     }
 
     public static void main(String[] args) {
-
+        System.out.println(minimumJump(new int[]{2, 3, 1, 1, 0}));
     }
 
 }
