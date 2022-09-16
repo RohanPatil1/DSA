@@ -10,7 +10,7 @@ public class MinimumPlatforms {
         }
 
         Collections.sort(list, new CustomCComparator2());
-        for(MyPair p:list){
+        for (MyPair p : list) {
             System.out.println(p.a);
         }
 
@@ -21,10 +21,11 @@ public class MinimumPlatforms {
 
         for (int i = 1; i < n; i++) {
             MyPair currT = list.get(i);
-
+            //Arrival of train is greater than next's departure
             if (currT.a >= pq.peek().a) {
                 int samePlatform = pq.peek().b;
                 pq.poll();
+                //Put curr's departure as next's departure in pq
                 pq.offer(new MyPair(currT.b, samePlatform));
             } else {
                 //Need new platform - Prev dept is greater than next arrival
@@ -39,32 +40,28 @@ public class MinimumPlatforms {
     }
 
     public static int getPlatforms(int[] arr, int[] dept, int n) {
-        int result = 0;
         Arrays.sort(arr);
         Arrays.sort(dept);
 
-        int platNeeded = 1;
-        int i = 1, j = 0;
-        while (i < n && j < n) {
+        int i = 1, j = 0, platNeeded = 1;
+
+        while (i < n) {
             if (arr[i] <= dept[j]) {
                 platNeeded++;
-                i++;
-            } else if (arr[i] > dept[j]) {
-                platNeeded--;
+            } else {
                 j++;
             }
-
-            result = Math.max(result, platNeeded);
+            i++;
         }
 
-        return result;
+        return platNeeded;
     }
 
     public static void main(String[] args) {
 
-        int[] arr = new int[] {50,120,200,550,700,850};
-        int[] dept = new int[] {500,550,600,700,900,1000};
-        int result =getPlatforms(arr, dept, 6);
+        int[] arr = new int[]{50, 120, 200, 550, 700, 850};
+        int[] dept = new int[]{500, 550, 600, 700, 900, 1000};
+        int result = getPlatforms(arr, dept, 6);
         System.out.println(result);
     }
 }
