@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.TreeSet;
 
 public class ChooseAndSwap {
 
@@ -16,44 +14,39 @@ public class ChooseAndSwap {
                 ans += str.charAt(i);
         }
         return ans;
-
     }
 
     public static String chooseSwap(String str) {
 
-
-        List<Character> list = new ArrayList<>();
+        TreeSet<Character> set = new TreeSet<>();
         int n = str.length();
         for (int i = 0; i < n; i++) {
             char c = str.charAt(i);
-            if (!list.contains(c)) {
-                list.add(c);
-            }
+            set.add(c);
         }
-        Collections.sort(list);
-
+        System.out.println(set);
         for (int i = 0; i < n; i++) {
-//            char curr = str.charAt(i);
+            set.remove(str.charAt(i));
+            System.out.println("After Removal: "+set);
 
-
-            list.remove(i);
-            if (list.isEmpty()) break;
-
-            char curr = list.get(0); //smallest char
-            if (curr < str.charAt(i)) {
+            if (set.isEmpty()) break;
+            char currSmallestInSet = set.first(); //smallest char
+            if (currSmallestInSet < str.charAt(i)) {
                 //Replace
-                replace(str, str.charAt(i), curr);
+                System.out.println("Before replace :" + currSmallestInSet +" & "+str.charAt(i)+ "  STR: "+str);
+
+               str =  replace(str, str.charAt(i), currSmallestInSet);
+                System.out.println("After replace : STR: "+str);
+
                 break;
-
             }
-
-
         }
-
         return str;
     }
 
     public static void main(String[] args) {
+        System.out.println(chooseSwap("ccad"));
 
+//        System.out.println(replace("rohan",'o','n'));
     }
 }

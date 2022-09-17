@@ -1,6 +1,11 @@
 import java.util.*;
 
-
+class Comp implements Comparator<Integer>{
+    @Override
+    public int compare(Integer o1, Integer o2) {
+        return o2-o1;
+    }
+}
 public class MinCostToCutBoard {
 
 
