@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class PairG implements Comparable<PairG> {
     int petrol, dist;
 
@@ -15,12 +18,46 @@ class PairG implements Comparable<PairG> {
 
 public class GasStation {
 
+
+    //O(n^2)
+    public static int gasStationBruteF(int[] petrol, int[] distance) {
+
+        List<PairG> dataList = new ArrayList<>();
+        int n = petrol.length;
+        //Add elements
+        for (int i = 0; i < petrol.length; i++) {
+            dataList.add(new PairG(petrol[i], distance[i]));
+        }
+        int j = 0;
+        //For every element i
+        for (int i = 0; i < n; i++) {
+            int currPetrol = dataList.get(i).petrol;
+            j = 0;
+            for (j = i; j < n + i; j++) {
+                if (currPetrol >= dataList.get(j).dist) {
+                    currPetrol += dataList.get(j + 1).petrol - dataList.get(j).dist;
+                } else {
+                    break;
+                }
+            }
+
+            //Check distance covered
+            if (j == n + i) {
+                return i;
+            }
+
+            i = j + 1;
+        }
+
+        return -1;
+    }
+
     public static int tour(int petrol[], int distance[]) {
         // Your code here
         int n = petrol.length;
 
         int sumP = 0;
-        int sumD  =0;
+        int sumD = 0;
 
         for (int i = 0; i < n; i++) {
             sumP += petrol[i];
@@ -28,16 +65,16 @@ public class GasStation {
 
         }
 
-        if(sumD>sumP)
+        if (sumD > sumP)
             return -1;
 
 
-        int start = 0,reqFuel=0,extraFuel=0;
+        int start = 0, reqFuel = 0, extraFuel = 0;
 
-        for(int i=0;i<n;i++){
+        for (int i = 0; i < n; i++) {
             extraFuel += petrol[i] - distance[i];
-            if(extraFuel<0){
-                start = i+1;
+            if (extraFuel < 0) {
+                start = i + 1;
                 reqFuel += extraFuel;
                 extraFuel = 0;
             }
@@ -45,7 +82,7 @@ public class GasStation {
 
         }
 
-        if((reqFuel+extraFuel)>=0){
+        if ((reqFuel + extraFuel) >= 0) {
             return start;
         }
 

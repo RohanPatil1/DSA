@@ -26,22 +26,30 @@ public class JobSequencing {
     public static int[] jobScheduling(Job arr[], int n) {
         // Your code here
 
-        boolean[] flags = new boolean[n];
+        int deadMax = Integer.MIN_VALUE;
+        for(Job j:arr){
+            deadMax = Math.max(deadMax,j.deadline);
+        }
+        boolean[] flags =new boolean[deadMax+1];
         Arrays.sort(arr, new JobComparator());
-        int jobs = 0, profit = 0;
-        for (int i = 0; i < n; i++) {
-            Job curr = arr[0];
-            if (flags[i] == false) {
-                flags[i] = true;
-                jobs++;
-                profit += curr.profit;
-                break; //Slot done
+        int jobCount = 0,profit = 0;
+        for(int i=0;i<n;i++){
+
+            Job curr = arr[i];
+
+
+            for(int j=curr.deadline;j>0;j--){
+                if(flags[j]==false){
+                    flags[j] = true;
+                    jobCount++;
+                    profit += curr.profit;
+                    break;
+                }
             }
+
         }
 
-
-
-        return new int[]{jobs,profit};
+        return new int[]{jobCount, profit};
     }
 
     public static void main(String[] args) {
