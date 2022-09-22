@@ -33,12 +33,11 @@ public class VerticalTreeTraversal {
         Map<Integer, PriorityQueue<VPair>> map = new HashMap<>();
         Queue<VPair> q = new LinkedList<>();
         q.add(new VPair(root, 0, 0));
-
         int leftMin = 0, rightMax = 0;
         while (!q.isEmpty()) {
             VPair point = q.poll();
 
-            root = point.node;
+            root = point.node; // NOT RECOMMENDED - USE VISITED MAP/ARR
             map.putIfAbsent(point.x, new PriorityQueue<>(new VPairComparator()));
             map.get(point.x).add(point);
             leftMin = Math.min(leftMin, point.x);
