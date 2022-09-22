@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class RootToNodePathTree {
 
-
     static ArrayList<Integer> arrayList = new ArrayList<>();
 
     public static boolean rootToNodePath(BNode root, int target) {
