@@ -23,7 +23,6 @@ public class LowestCommonAncestorTree {
     }
 
 
-
     ///---------Approach 1 - get path for both and check from last for common node
     boolean getPath(BNode root, List<BNode> pathList, BNode target) {
         if (root == null) {
@@ -52,18 +51,18 @@ public class LowestCommonAncestorTree {
     BNode lcaA1(BNode root, BNode p, BNode q) {
         List<BNode> pathP = new ArrayList<>();
         List<BNode> pathQ = new ArrayList<>();
-        getPath(root,pathP,p);
+        getPath(root, pathP, p);
 
         System.out.println(pathP);
-        getPath(root,pathQ,q);
+        getPath(root, pathQ, q);
 
         System.out.println(pathQ);
 
 
-        int limit = Math.min(pathQ.size()-1,pathP.size()-1);
+        int limit = Math.min(pathQ.size() - 1, pathP.size() - 1);
 
-        for(int i=limit;i>=0;i--){
-            if(pathQ.get(i).data == pathP.get(i).data){
+        for (int i = limit; i >= 0; i--) {
+            if (pathQ.get(i).data == pathP.get(i).data) {
                 return pathQ.get(i);
             }
         }
@@ -72,5 +71,25 @@ public class LowestCommonAncestorTree {
 
     }
 
+
+    ///----------LCA in BINARY SEARCH TREE TimeComplexity-> O(H)
+
+    public static BNode lcaInBST(BNode root, BNode p, BNode q) {
+        if (root == null) {
+            return null;
+        }
+
+        int currVal = root.data;
+
+        //Does both p & q lie in the right
+        if (currVal < p.data && currVal < q.data) {
+            //Go Right
+            return lcaInBST(root.right, p, q);
+        } else if (currVal > p.data && currVal > q.data) {
+            //Go left
+            return lcaInBST(root.left, p, q);
+        }
+        return root;
+    }
 
 }
