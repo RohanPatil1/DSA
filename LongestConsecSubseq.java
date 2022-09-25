@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LongestConsecSubseq {
     public int longestConsecutive(int[] arr) {
@@ -27,5 +29,24 @@ public class LongestConsecSubseq {
 
         return Math.max(maxCount,count);
 
+    }
+
+    //O(N)
+    public int longestConsecutive2(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for(int n : nums) {
+            set.add(n);
+        }
+        int best = 0;
+        for(int n : set) {
+            if(!set.contains(n - 1)) {  // only check for one direction
+                int m = n + 1;
+                while(set.contains(m)) {
+                    m++;
+                }
+                best = Math.max(best, m - n);
+            }
+        }
+        return best;
     }
 }

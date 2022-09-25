@@ -54,13 +54,38 @@ public class MaxInSlidingWindow {
         return result;
     }
 
-  
+
+    //O(N*k)
+    public int[] maxSlidingWindowA1(int[] nums, int k) {
+        // assume nums is not null
+        int n = nums.length;
+        if (n == 0 || k == 0) {
+            return new int[0];
+        }
+
+        int numOfWindow = n - k + 1;  // Number of windows for an array size n & k
+        int[] result = new int[numOfWindow]; // number of windows
+
+        for (int start = 0; start < numOfWindow; ++start) {
+            int end = start + k - 1;
+            int maxVal = nums[start];
+            for (int i = start + 1; i <= end; ++i) {
+                if (nums[i] > maxVal) { // update
+                    maxVal = nums[i];
+                }
+            }
+            result[start] = maxVal;
+        }
+
+        return result;
+    }
+
+
     public static void main(String[] args) {
 
-        int[] arr = { 7,2,4 };
-        ArrayList<Integer> res = getMaxs(arr, 2);
-        System.out.println(res.toString());
-
+        int[] arr = {1,3,-1,-3,5,3,6,7};
+        ArrayList<Integer> res = getMaxs(arr, 3);
+        System.out.println(res);
 
     }
 }
