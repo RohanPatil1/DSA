@@ -41,7 +41,7 @@ public class VerticalTreeTraversal {
             map.putIfAbsent(point.x, new PriorityQueue<>(new VPairComparator()));
             map.get(point.x).add(point);
             leftMin = Math.min(leftMin, point.x);
-            rightMax = Math.max(rightMax, point.y);
+            rightMax = Math.max(rightMax, point.x);
 
             if (root.left != null) {
                 q.add(new VPair(root.left, point.x - 1, point.y + 1));
