@@ -24,6 +24,17 @@ public class DijkstraAlgorithm {
     //from the source vertex S.
     static int[] dijkstra(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj, int src)
     {
+
+        /*
+        adj = {{{1, 1}, {2, 6}}, {{2, 3}, {0, 1}}, {{1, 3}, {0, 6}}}
+        V = 3, E = 3
+        S = 2
+
+        0=[ [1,1], [2,6] ]
+        1=[ [2,3], [0,1] ]
+        2=[ [1,3], [0,6] ]
+         */
+
         // Write your code here
         PriorityQueue<GNode> pq = new PriorityQueue<>(new GNodeComparator());
         int[] dist = new int[V];
