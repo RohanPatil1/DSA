@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class GoldMineProblem {
 
     public static void printMatrix(int[][] arr) {
@@ -56,19 +54,6 @@ public class GoldMineProblem {
         return t[i][j] = gold[i][j] + Math.max(x, Math.max(y, z));
     }
 
-    public static int maxGoldRec(int[][] gold, int n, int m) {
-        int gMax = 0;
-
-        for (int[] arr : t) Arrays.fill(arr, -1);
-        for (int i = 0; i < n; i++) {
-            gMax = Math.max(gMax, recursion(gold, i, 0));
-
-        }
-
-
-        return gMax;
-    }
-
 
     public static void main(String[] args) {
         int[][] m = new int[][]{{1, 3, 1, 5},
@@ -77,7 +62,6 @@ public class GoldMineProblem {
                 {0, 6, 1, 2}};
 
         System.out.println(maxGold(m, m.length, m[0].length));
-        System.out.println(maxGoldRec(m, m.length, m[0].length));
     }
 
 }
