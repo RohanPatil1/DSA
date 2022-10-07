@@ -41,4 +41,28 @@ public class KthSmallestLargestInBST {
         return recValue;
     }
 
+    int ans = 0;
+    public int kthSmallest3(BNode root, int k) {
+
+        solve(root, k);
+        return ans;
+    }
+
+    void solve(BNode root, int k){
+
+        if(root.left != null) solve(root.left, k);
+
+        count++;
+        if(count == k){
+            ans = root.data;
+            return;
+        }
+
+
+
+        if(root.right != null) solve(root.right, k);
+
+    }
+
+
 }
