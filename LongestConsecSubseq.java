@@ -32,21 +32,31 @@ public class LongestConsecSubseq {
     }
 
     //O(N)
-    public int longestConsecutive2(int[] nums) {
+    public int longestConsecutive2(int[] arr) {
+
         Set<Integer> set = new HashSet<>();
-        for(int n : nums) {
-            set.add(n);
-        }
-        int best = 0;
-        for(int n : set) {
-            if(!set.contains(n - 1)) {  // only check for one direction
-                int m = n + 1;
-                while(set.contains(m)) {
-                    m++;
+        for(int curr : arr) set.add(curr);
+
+        int maxLength = 0;
+        int length = 0;
+        for(int curr : arr){
+
+            length = 0;
+
+            //Check if its the start of a sequence if the left exist
+            if(!set.contains(curr - 1)){
+
+                while(set.contains(curr + length)){
+                    length++;
                 }
-                best = Math.max(best, m - n);
+
+
+                maxLength = Math.max(maxLength, length);
             }
+
+
         }
-        return best;
+
+        return maxLength;
     }
 }
