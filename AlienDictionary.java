@@ -1,11 +1,10 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
 import java.util.LinkedList;
+import java.util.*;
 
 public class AlienDictionary {
 
-    public static String findOrder(String[] dict, int N, int K) {
+
+    public static String findOrderBFS(String[] dict, int N, int K) {
 
         List<List<Integer>> adj = new ArrayList<>();
 
@@ -78,8 +77,71 @@ public class AlienDictionary {
 
     }
 
+    public static String findOrderDFS (String[] words, int n, int k) {
+        //Construct Adj ===
+        List<List<Integer>> adj = new ArrayList<>();
+        for(int i=0; i<k; i++){
+            adj.add(new ArrayList<>());
+        }
+
+
+        for(int d=0; d<words.length-1; d++){
+            String str1 = words[d];
+            String str2 = words[d+1];
+            int minSize = Math.min(str1.length(), str2.length());
+
+            for(int i=0; i< minSize; i++){
+
+                if(str1.charAt(i) != str2.charAt(i)){
+
+                    adj.get(str1.charAt(i) - 'a').add(str2.charAt(i) - 'a');
+                    break;
+
+                }
+
+            }
+
+        }
+
+        //Get Topological Sorted List ===
+        Stack<Integer> stack = new Stack<>();
+        int[] visited = new int[k];
+        for(int i=0; i<k; i++){
+            if(visited[i]==0)
+                dfs(i, adj, stack, visited);
+        }
+
+        StringBuilder result = new StringBuilder();
+        while(!stack.isEmpty()){
+
+            result.append((char)  ('a' + stack.pop()) );
+
+        }
+
+        return result.toString();
+
+    }
+
+    public static void dfs(int src, List<List<Integer>> adj, Stack<Integer> stack, int[] visited ){
+        visited[src] = 1;
+
+        for(int k: adj.get(src)){
+
+            if(visited[k] == 0){
+                visited[k] = 1;
+                dfs(k, adj, stack, visited);
+            }
+
+        }
+
+        stack.add(src);
+
+    }
+
+
+
     public static void main(String[] args) {
         String[] arr = new String[]{"baa", "abcd", "abca", "cab", "cad"};
-        System.out.println(findOrder(arr, 5, 4));
+        System.out.println(findOrderBFS(arr, 5, 4));
     }
 }
