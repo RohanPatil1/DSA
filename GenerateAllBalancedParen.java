@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class GenerateAllBalancedParen {
-
+//Time= O(2^2n) Exponential
     public static void gbpHelper(String op, int o, int c, ArrayList<String> ans) {
         if (o == 0 && c == 0) {
             ans.add(op);

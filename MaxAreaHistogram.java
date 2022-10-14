@@ -2,7 +2,7 @@
 import java.util.*;
 
 public class MaxAreaHistogram {
-
+    //https://leetcode.com/problems/largest-rectangle-in-histogram/discuss/1727776/JavaC%2B%2B-Explanation-going-from-Brute-to-Optimal-Approach
     static class Pair {
         int value;
         int index;
@@ -14,82 +14,76 @@ public class MaxAreaHistogram {
 
     }
 
-    public static int maxHistogram(int[] arr) {
-        int result = 0;
 
-        ArrayList<Integer> left = new ArrayList<>();
-        ArrayList<Integer> right = new ArrayList<>();
-        Stack<Pair> stack = new Stack<>();
-        int n = arr.length;
-
-        // Left => NSL
-        for (int i = 0; i < n; i++) {
-
-            if (stack.isEmpty()) {
-                left.add(-1);
-            } else if (!stack.isEmpty() && stack.peek().value < arr[i]) {
-                left.add(stack.peek().index);
-            } else if (!stack.isEmpty() && stack.peek().value >= arr[i]) {
-                while (!stack.isEmpty() && stack.peek().value >= arr[i]) {
-                    stack.pop();
+    public static int maxHistogramA1(int[] heights) {
+        int n = heights.length;
+        int[] leftMin = new int[n];
+        Stack<Integer> left = new Stack<>();
+        Arrays.fill(leftMin, -1);
+        for (int i = heights.length - 1; i >= 0; i--) {
+            if (left.isEmpty() || heights[i] >= heights[left.peek()]) {
+                left.add(i);
+            } else {
+                while (!left.isEmpty() && heights[left.peek()] > heights[i]) {
+                    leftMin[left.peek()] = i;
+                    left.pop();
                 }
-                if (stack.isEmpty()) {
-                    left.add(-1);
-                } else {
-                    left.add(stack.peek().index);
-                }
+                left.add(i);
             }
-
-            stack.push(new Pair(arr[i], i));
         }
-
-        System.out.println(left.toString());
-
-        // NSR
-        stack.clear();
-
-        for (int i = n - 1; i >= 0; i--) {
-
-            if (stack.isEmpty()) {
-                right.add(-1);
-            } else if (!stack.isEmpty() && stack.peek().value < arr[i]) {
-                right.add(stack.peek().index);
-            } else if (!stack.isEmpty() && stack.peek().value >= arr[i]) {
-                while (!stack.isEmpty() && stack.peek().value >= arr[i]) {
-                    stack.pop();
+        int[] rightMin = new int[n];
+        Stack<Integer> right = new Stack<>();
+        Arrays.fill(rightMin, heights.length);
+        for (int i = 0; i < heights.length; i++) {
+            if (right.isEmpty() || heights[i] >= heights[right.peek()]) {
+                right.add(i);
+            } else {
+                while (!right.isEmpty() && heights[right.peek()] > heights[i]) {
+                    rightMin[right.peek()] = i;
+                    right.pop();
                 }
-                if (stack.isEmpty()) {
-                    right.add(-1);
-                } else {
-                    right.add(stack.peek().index);
-                }
+                right.add(i);
             }
-
-            stack.push(new Pair(arr[i], i));
         }
-        Collections.reverse(right);
-        System.out.println(right.toString());
-
-        // Make width array
-        ArrayList<Integer> width = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            int element = right.get(i) - left.get(i) - 1;
-            width.add(element);
+        int area = Integer.MIN_VALUE;
+        for (int i = 0; i < heights.length; i++) {
+            area = Math.max(area, heights[i] * (rightMin[i] - leftMin[i] - 1));
         }
-
-        // Calculate Area
-        for (int i = 0; i < n; i++) {
-            result = Math.max(result, arr[i] * width.get(i));
-        }
-        System.out.println("Max Area : " + result);
-        return result;
+        System.out.println(area);
+        return area;
     }
+
+    public static int maxHistogramA2(int[] heights) {
+        int n = heights.length;
+        int maxArea = 0;
+
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i <= n; i++) {
+            int currHeight = (i == n) ? 0 : heights[i];
+            //we add if currHeight is part of the increasing sequence else we calculate area and pop() it;
+            while (!stack.isEmpty() && currHeight < heights[stack.peek()]) { /// 3 1 so pop(3) after getArea from 3
+                int top = stack.pop();
+
+                int width = stack.isEmpty() ? i : i - stack.peek() - 1;
+                int area = heights[top] * width;
+                maxArea = Math.max(maxArea, area);
+
+            }
+
+            stack.push(i);
+        }
+
+        System.out.println(maxArea);
+        return maxArea;
+    }
+
 
     public static void main(String[] args) {
 
         // List<Integer> r = leftSmaller(7, new int[] { 19, 19, 19, 19, 19, 19, 19 });
         // System.out.println(r.toString());
-        maxHistogram(new int[] { 6, 2, 5, 4, 5, 1, 6 });
+        maxHistogramA1(new int[]{2, 4});
+        maxHistogramA2(new int[]{2, 4});
 
     }
 }
