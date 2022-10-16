@@ -33,56 +33,18 @@ public class WallAndGates {
         }
     }
 
-    public void wallsAndGate(int[][] rooms) {
-        int n = rooms.length;
-        int m = rooms[0].length;
 
-        int[][] visited = new int[n][m];
-        Queue<Pair> q = new LinkedList<>();
-
-
-        //Start traversal for every gate
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (rooms[i][j] == 0) {
-//                    dfs(i, j, 0, rooms);
-                    visited[i][j] = 1;
-                    q.add(new Pair(i, j));
-                }
-            }
+    private void dfs(int i, int j, int distance, int[][] rooms) {
+        if (i < 0 || j < 0 || i >= rooms.length || j >= rooms[0].length) {
+            return;
         }
 
-        //BFS
-        int distance = 0;
-        while (!q.isEmpty()) {
-            int size = q.size();
-            for (int k = 0; k < size; k++) {
-                Pair currP = q.poll();
-                int row = currP.row;
-                int col = currP.col;
+        rooms[i][j] = distance;
 
-                rooms[row][col] = distance;
-
-                //Traverse in 4 direction
-                int[] delR = new int[]{-1, 0, 1, 0};
-                int[] delC = new int[]{0, 1, 0, -1};
-
-                for (int i = 0; i < 4; i++) {
-                    int nRow = row + delR[i];
-                    int nCol = col + delC[i];
-
-                    //Add Room
-                    if (nRow >= 0 && nCol >= 0 && nRow < n && nCol < m && visited[nRow][nCol] == 0 && rooms[nRow][nCol] != -1) {
-                        visited[nRow][nCol] = 1;
-                        q.add(new Pair(nRow, nCol));
-                    }
-
-                }
-            }
-            distance += 1;
-
-        }
-
+        dfs(i + 1, j, distance + 1, rooms);
+        dfs(i - 1, j, distance + 1, rooms);
+        dfs(i, j + 1, distance + 1, rooms);
+        dfs(i, j - 1, distance + 1, rooms);
 
     }
 
@@ -92,12 +54,12 @@ public class WallAndGates {
         int n = rooms[0].length;
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (rooms[i][j] == 0) q.add(new int[] { i, j });
+                if (rooms[i][j] == 0) q.add(new int[]{i, j});
             }
         }
 
         if (q.size() == 0) return;
-        int[][] dirs = { { -1, 0 }, { 0, -1 }, { 1, 0 }, { 0, 1 } };
+        int[][] dirs = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
         while (!q.isEmpty()) {
             int[] cur = q.poll();
             int row = cur[0];
@@ -112,7 +74,7 @@ public class WallAndGates {
                                 y < 0 ||
                                 rooms[x][y] != Integer.MAX_VALUE
                 ) continue;
-                q.add(new int[] { x, y });
+                q.add(new int[]{x, y});
                 //since cur is basically the index of door (which is equal to 0)
                 //So, we can just grab that value (rooms[row][col]) and add 1 to it and change it every time
                 rooms[x][y] = rooms[row][col] + 1;
@@ -121,17 +83,43 @@ public class WallAndGates {
         }
     }
 
-    private void dfs(int i, int j, int distance, int[][] rooms) {
-        if (i < 0 || j < 0 || i >= rooms.length || j >= rooms[0].length) {
-            return;
+    //Using BFS
+    public void wallsAndGates2(int[][] rooms) {
+        int n = rooms.length;
+        int m = rooms[0].length;
+        Queue<Pair> q = new LinkedList<>();
+
+        //Add all gates to queue
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (rooms[i][j] == 0) {
+                    q.add(new Pair(i, j));
+                }
+            }
         }
 
-        rooms[i][j] = distance;
+        int[] delR = new int[]{-1, 0, 1, 0};
+        int[] delC = new int[]{0, 1, 0, -1};
 
-        dfs(i + 1, j, distance + 1, rooms);
-        dfs(i - 1, j, distance + 1, rooms);
-        dfs(i, j + 1, distance + 1, rooms);
-        dfs(i, j - 1, distance + 1, rooms);
+        //BFS
+        while (!q.isEmpty()) {
+            Pair currP = q.poll();
+            int row = currP.row;
+            int col = currP.col;
+
+            //Traverse in 4 direction
+            for (int i = 0; i < 4; i++) {
+                int nRow = row + delR[i];
+                int nCol = col + delC[i];
+
+                if (nRow >= 0 && nRow < n && nCol >= 0 && nCol < m && rooms[nRow][nCol] != Integer.MAX_VALUE) {
+                    q.add(new Pair(nRow, nCol));
+                    rooms[nRow][nCol] = rooms[row][col] + 1;
+                }
+
+            }
+
+        }
 
     }
 
