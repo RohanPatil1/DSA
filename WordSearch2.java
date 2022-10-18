@@ -4,6 +4,29 @@ import java.util.List;
 import java.util.Set;
 
 public class WordSearch2 {
+    /*
+    let:
+N = num of rows
+M = num of columns
+X = number of words in dictionary
+Y = length of the longest word in dictionary
+
+Time complexity of using a set instead of a trie tree
+
+We are doing a 4-child DFS traversal of depth N*M (worst case is traversing entire board). -> 4^(NM)
+We are doing this N*M times since we need to check for words starting at each position in the board
+-> O(4^(NM)*NM)
+Time complexity of using the trie tree
+
+We are doing a 4-child DFS traversal.
+The worst case depth in this case is the minimum of [traversing the entire board, traversing until we hit the end of a word].
+-> O of each traversal is4^(min(Y, NM))
+Note: min accounts for the case where we have words in the dictionary longer than the number of characters in the board itself.
+We are doing this N*M times since we need to check for words starting at each position in the board
+-> O(4^(min(Y, NM))*NM)
+
+https://leetcode.com/problems/word-search-ii/discuss/59780/Java-15ms-Easiest-Solution-(100.00)
+     */
 
     class TrieNode {
         TrieNode[] children = new TrieNode[26];
