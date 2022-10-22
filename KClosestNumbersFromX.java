@@ -26,6 +26,8 @@ import java.util.*;
 //     }
 // }
 
+
+
 class pair implements Comparable<pair> {
     int hn;
     int d;
@@ -116,7 +118,6 @@ public class KClosestNumbersFromX {
         int arr[] = { 10, 50, 20, 17, 80 };
         int x = 20, k = 3;
         int n = arr.length;
-
         // printKclosest(arr, n, x, k);
         System.out.println();
         printKclosest2(new int[] { 10, 2, 14, 4, 7, 6 }, 6, 5, 3);
