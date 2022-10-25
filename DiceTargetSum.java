@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class DiceTargetSum {
+public class    DiceTargetSum {
 
     int mod = 1000000007;
 
