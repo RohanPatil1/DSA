@@ -60,13 +60,14 @@ public class Subsets {
 
     }
 
-    public void solve2(int[] nums, int index, List<Integer> currList, Set<List<Integer>> setList) {
+    public void solve2(int[] nums, int index, List<Integer> currList, List<List<Integer>> resList) {
 
-        currList.add(nums[index]);//[]
+        resList.add(new ArrayList<>(currList));
 
+        //[]
         for (int i = index; i < nums.length; i++) {
             currList.add(nums[i]);//[1]
-            solve2(nums, i + 1, currList, setList);//---------------go deep [], [1]
+            solve2(nums, i + 1, currList, resList);//---------------go deep [], [1]
             currList.remove(currList.size() - 1);//[]
         }
 
