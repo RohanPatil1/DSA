@@ -4,12 +4,20 @@ public class DisjointSet {
     static int[] rank = new int[8];
     static int[] size = new int[8];
 
-
-    public static void createSet(int n) {
+    public DisjointSet(int V){
         //Every parent is himself & height 0
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i <V; i++) {
             parent[i] = i;
             rank[i] = 0;
+            size[i] = 1;
+        }
+    }
+    public static void createSet(int n) {
+        //Every parent is himself & height 0
+        for (int i = 1; i <= n; i++) {
+            parent[i] = i;
+            rank[i] = 0;
+            size[i] = 1;
         }
     }
 
@@ -70,5 +78,49 @@ public class DisjointSet {
             System.out.println(x);
         }
     }
+
+
+    static class UF {
+        private int[] parent, size;
+        private int count;
+
+        public UF(int n) {
+            parent = new int[n];
+            size = new int[n];
+            count = n;
+            for (int i = 0; i < n; i++) {
+                parent[i] = i;
+                size[i] = 1;
+            }
+
+        }
+
+        public int find(int node) {
+            if (node == parent[node]) {
+                return node;
+            }
+
+            return parent[node] = find(parent[node]);
+        }
+
+        public void union(int p, int q) {
+            int rootP = find(p);
+            int rootQ = find(q);
+            if (rootP == rootQ)
+                return;
+            // union by size
+            if (size[rootP] > size[rootQ]) {
+                parent[rootQ] = rootP;
+                size[rootP] += size[rootQ];
+            } else {
+                parent[rootP] = rootQ;
+                size[rootQ] += size[rootP];
+            }
+            count--;
+        }
+
+        public int count() { return count; }
+    }
+
 
 }
