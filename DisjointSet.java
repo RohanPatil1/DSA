@@ -120,6 +120,10 @@ public class DisjointSet {
         }
 
         public int count() { return count; }
+
+        public int getSizeAt(int i){
+            return size[i];
+        }
     }
 
 
