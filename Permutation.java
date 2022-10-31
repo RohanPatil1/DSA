@@ -38,14 +38,14 @@ public class Permutation {
         }
 
     }
-
+//Time=>O(N! * n)
     private void solve2(int[] nums, List<Integer> currList, int index, List<List<Integer>> permutationList) {
-        if (currList.size() == nums.length) {
+        if (index == nums.length) {
             List < Integer > list = new ArrayList < > ();
             for (int i = 0; i < nums.length; i++) {
-                currList.add(nums[i]);
+                list.add(nums[i]);
             }
-            permutationList.add(new ArrayList < > (currList));
+            permutationList.add(list);
             return;
         }
 
