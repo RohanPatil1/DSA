@@ -66,6 +66,56 @@ public class TopKFrequent {
       //  return result;
     }
 
+    //A1 - Use MaxHeap then get top k elements Time => O(NLogN)
+    //A2 - Use MinHeap of k size, pop if size>k Time => O(NLogK)
+
+    //A3 - Bucket Sort Time => O(N)
+    public int[] topKFrequent(int[] nums, int k) {
+
+        int n = nums.length;
+        List<Integer>[] bucketArr = new List[ n + 1];
+
+        //Frequency Map
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int num : nums){
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        //Fill Bucket Arr
+        for(int key : map.keySet()){
+            int freq = map.get(key);
+            if(bucketArr[freq] == null){
+                bucketArr[freq] = new ArrayList<>();
+            }
+
+            bucketArr[freq].add(key);
+        }
+
+        //For top k frequent, go right->left get k elemets
+        int count =  0;
+        int[] topKArr = new int[k];
+
+        for(int i=n; i>=0; i--){
+
+            if(bucketArr[i] == null) continue;
+
+            List<Integer> currBucket = bucketArr[i];
+
+            for(int j=0; j<currBucket.size(); j++){
+                topKArr[count++] = currBucket.get(j);
+                if(count == k) break;
+            }
+
+            if(count == k) break;
+
+        }
+
+
+        return topKArr;
+
+    }
+
+
     public static void main(String[] args) {
 
         topKFreq(new int[] { 1, 1, 1, 3, 2, 2, 4 }, 2);
