@@ -43,6 +43,75 @@ public class BinaryTree {
         System.out.print(root.data + " ");
     }
 
+    public static void morrisInorderTraversal(BNode root) {
+
+        BNode curr = root, predecessor = null;
+        while (curr != null) {
+
+            if (curr.left == null) {
+                System.out.println(curr.data + " ");
+                curr = curr.right;
+            } else {
+
+                //Find predecessor i.e left then right bottom
+                predecessor = curr.left;
+                //                                   should not point self again
+                while (predecessor.right != null && predecessor.right != curr) {
+                    predecessor = predecessor.right;
+                }
+
+                if (predecessor.right == null) {
+                    //Make a temp link
+                    predecessor.right = curr;
+                    curr = curr.left;
+                } else {
+                    //Remove the link
+                    predecessor.right = null;
+                    System.out.println(curr.data + " ");
+                    curr = curr.right;
+
+                }
+
+            }
+
+        }
+
+    }
+
+    public static void morrisPreorderTraversal(BNode root) {
+
+        BNode curr = root, predecessor = null;
+        while (curr != null) {
+
+            if (curr.left == null) {
+                System.out.println(curr.data + " ");
+                curr = curr.right;
+            } else {
+
+                //Find predecessor i.e left then right bottom
+                predecessor = curr.left;
+                //                                   should not point self again
+                while (predecessor.right != null && predecessor.right != curr) {
+                    predecessor = predecessor.right;
+                }
+
+                if (predecessor.right == null) {
+                    //Make a temp link
+                    predecessor.right = curr;
+                    System.out.println(curr.data + " ");
+                    curr = curr.left;
+                } else {
+                    //Remove the link
+                    predecessor.right = null;
+                    curr = curr.right;
+
+                }
+
+            }
+
+        }
+
+    }
     public static void levelOrderTraversal(BNode root) {
         BFS(root);
     }
