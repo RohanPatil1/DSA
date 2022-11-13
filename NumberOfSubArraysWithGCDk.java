@@ -15,7 +15,7 @@ public class NumberOfSubArraysWithGCDk {
                 currGCD = gcd(arr[j],currGCD);
 
                 if(currGCD == k) count++;
-                else break;
+
             }
         }
 
