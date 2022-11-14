@@ -1,7 +1,5 @@
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class CoPrime {
 
@@ -66,45 +64,45 @@ public class CoPrime {
 
     }
 
-    public class Test {
-
-        public static void main (String[] args) throws java.lang.Exception
-        {
-            Scanner sc = new Scanner(System.in);
-            int t = sc.nextInt();
-
-            while(t-- > 0)
-                solve(sc);
-        }
-
-        public static void solve(Scanner sc){
-
-            int n = sc.nextInt(), arr[] = new int[1001];
-            Arrays.fill(arr, -1);
-
-            for(int i=1; i<=n; i++){
-                int x = sc.nextInt();
-                arr[x] = i;
-            }
-
-            int ans = -1;
-            for(int i=1; i<=1000; i++){
-                if(arr[i] != -1){
-                    for(int j=1; j<=1000; j++){
-                        if(arr[j] != -1 && gcd(i, j) == 1)
-                            ans = Math.max(ans, arr[i] + arr[j]);
-                    }
-                }
-            }
-
-            System.out.println(ans);
-        }
-
-        public static int gcd(int a, int b){
-            if(b == 0) return a;
-            return gcd(b, a % b);
-        }
-    }
+//    public class Test {
+//
+//        public static void main (String[] args) throws java.lang.Exception
+//        {
+//            Scanner sc = new Scanner(System.in);
+//            int t = sc.nextInt();
+//
+//            while(t-- > 0)
+//                solve(sc);
+//        }
+//
+//        public static void solve(Scanner sc){
+//
+//            int n = sc.nextInt(), arr[] = new int[1001];
+//            Arrays.fill(arr, -1);
+//
+//            for(int i=1; i<=n; i++){
+//                int x = sc.nextInt();
+//                arr[x] = i;
+//            }
+//
+//            int ans = -1;
+//            for(int i=1; i<=1000; i++){
+//                if(arr[i] != -1){
+//                    for(int j=1; j<=1000; j++){
+//                        if(arr[j] != -1 && gcd(i, j) == 1)
+//                            ans = Math.max(ans, arr[i] + arr[j]);
+//                    }
+//                }
+//            }
+//
+//            System.out.println(ans);
+//        }
+//
+//        public static int gcd(int a, int b){
+//            if(b == 0) return a;
+//            return gcd(b, a % b);
+//        }
+//    }
 }
 
 
