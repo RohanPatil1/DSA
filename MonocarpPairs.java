@@ -1,40 +1,55 @@
-public class MonocarpPairs {
-
-
-    public static int getPairCount(int[] arr) {
-
-        int n = arr.length, count = 0, sum = 0;
-        for (int num : arr) sum += num;
-
-        int sum2 = sum - (2 * (sum / n));
-
-        int targetSumOfPairs = sum - sum2;
-
-        count = getPairCount(arr, targetSumOfPairs);
-        return count;
-    }
-
-    public static int getPairCount(int[] arr, int target) {
-
-        int count = 0;
-        int n = arr.length;
-        for (int j = n - 1; j >= 0; j--) {
-            for (int i = 0; i < j; i++) {
-                int currSum = arr[j] + arr[i];
-                if (currSum == target) {
-                    count++;
-                }
-            }
-        }
-
-        return count;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(getPairCount(new int[]{8, 8, 8, 8}));
-        System.out.println(getPairCount(new int[]{50, 20, 10}));
-        System.out.println(getPairCount(new int[]{1, 4, 7, 3, 5}));
-        System.out.println(getPairCount(new int[]{1, 2, 3, 4, 5, 6, 7}));
-    }
-
-}
+//import java.util.HashMap;
+//import java.util.Map;
+//import java.util.Scanner;
+//
+//public class MonocarpPairs {
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//
+//        int test = sc.nextInt();
+//        for (int t = 0; t < test; ++t) {
+//            int n = sc.nextInt();
+//
+//            double sum = 0;
+//            HashMap<Integer, Long> map = new HashMap<>();
+//
+//            for (int i = 0; i < n; i++) {
+//
+//                int num = sc.nextInt();
+//                sum += num;
+//                map.put(num, map.getOrDefault(num, 0L) + 1L);
+//            }
+//
+//            double sum2 = sum - (2 * (sum / n));
+//
+//            int targetSumOfPairs = (int) (sum - sum2);
+//
+//            long ans = 0;
+//
+//            //Check if integer
+//            if ((int) targetSumOfPairs != targetSumOfPairs) {
+//                System.out.println(ans);
+//                continue;
+//            }
+//
+//
+//            for (Map.Entry<Integer, Long> entry : map.entrySet()) {
+//                int currFirst = entry.getKey();
+//                long currFirstFreq = entry.getValue();
+//                int complement = targetSumOfPairs - currFirst;
+//
+//                if (currFirst == complement) {
+//                    ans += (int) (currFirstFreq*(currFirstFreq-1))/2;
+//                } else if (map.containsKey(complement)) {
+//                    ans += currFirstFreq * map.get(complement);
+//                    map.put(currFirst, 0L);
+//                }
+//            }
+//
+//
+//            System.out.println(ans);
+//
+//        }
+//
+//    }
+//}
