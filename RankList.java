@@ -1,51 +1,207 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.StringTokenizer;
 
 public class RankList {
 
 
-    private static final Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
 
-    public static void main(String[] args) {
+        // Initialize the reader
+        FastReader reader = new FastReader();
 
-        int t = sc.nextInt();
-        while (t-- > 0) {
-            int[] arr = new int[2];
+        // Initialize the writer
+        FastWriter writer = new FastWriter();
 
-            for (int i = 0; i < 2; i++) {
-                arr[i] = sc.nextInt();
-            }
+        int T = reader.readSingleInt();
 
-            int n = arr[0];
-            int s = arr[1];
+        while (T-- > 0) {
 
+            // Reads a array of N number in a line
+            long[] arr = reader.readLongArray(2);
 
-            while(s>0){
-                s -= n;
-                n--;
-                if(n<0){
+            long n = arr[0];
+            long s = arr[1];
+
+            int count = 0;
+            // n =7  s = 18
+
+            long idealS = n*(n+1)/2;
+
+            for(long i = n;i>=1;i--){
+
+                if(s >= idealS){
                     break;
                 }
+                idealS -=i;
+                s--;
+                count++;
             }
+            writer.writeSingleInteger(count);
+        }
 
-            System.out.println(n);
+    }
+    public static void sort(int[] arr) {
+        //because Arrays.sort() uses quicksort which is dumb
+        //Collections.sort() uses merge sort
+        ArrayList<Integer> ls = new ArrayList<Integer>();
+        for (int x : arr)
+            ls.add(x);
+        Collections.sort(ls);
+        for (int i = 0; i < arr.length; i++)
+            arr[i] = ls.get(i);
+    }
 
+    public static long power(long x, long y, long p) {
+        //0^0 = 1
+        long res = 1L;
+        x = x % p;
+        while (y > 0) {
+            if ((y & 1) == 1)
+                res = (res * x) % p;
+            y >>= 1;
+            x = (x * x) % p;
+        }
+        return res;
+    }
+
+    // Fast Reader Class
+    public static class FastReader {
+
+        // Reader object
+        BufferedReader reader;
+
+        // Constructor
+        public FastReader() {
+            // Initialize the reader
+            reader = new BufferedReader(
+                    new InputStreamReader(
+                            System.in));
+        }
+
+        // String tokenizer
+        StringTokenizer tokenizer;
+
+        // Function to read integer
+        public int readSingleInt()
+                throws IOException {
+            return Integer.parseInt(
+                    reader.readLine());
+        }
+
+        // Function to read a single long
+        public long readSingleLong()
+                throws IOException {
+            return Long.parseLong(
+                    reader.readLine());
+        }
+
+        // Function to read a array of
+        // numsInts integers in 1 line
+        public int[] readIntArray(int numInts)
+                throws IOException {
+            int[] nums = new int[numInts];
+            tokenizer
+                    = new StringTokenizer(
+                    reader.readLine());
+
+            // Input Numbers
+            for (int i = 0; i < numInts; i++) {
+                nums[i] = Integer.parseInt(
+                        tokenizer.nextToken());
+            }
+            return nums;
+        }
+
+        public long[] readLongArray(int numInts)
+                throws IOException {
+            long[] nums = new long[numInts];
+            tokenizer
+                    = new StringTokenizer(
+                    reader.readLine());
+
+            // Input Numbers
+            for (int i = 0; i < numInts; i++) {
+                nums[i] = Long.parseLong(
+                        tokenizer.nextToken());
+            }
+            return nums;
+        }
+
+        // Function to read string
+        public String readString()
+                throws IOException {
+            return reader.readLine();
+        }
+    }
+
+    // Fast Writer Class
+    public static class FastWriter {
+
+        // Writer object
+        BufferedWriter writer;
+
+        // Constructor
+        public FastWriter() {
+
+            // Initialize the writer
+            writer = new BufferedWriter(
+                    new OutputStreamWriter(
+                            System.out));
+        }
+
+        // Function to write single integer
+        public void writeSingleInteger(int i)
+                throws IOException {
+            writer.write(Integer.toString(i));
+            writer.newLine();
+            writer.flush();
+        }
+
+        // Function to write a single long
+        public void writeSingleLong(long i)
+                throws IOException {
+            writer.write(Long.toString(i));
+            writer.newLine();
+            writer.flush();
+        }
+
+        // Function to write a Integer
+        // of array with spaces in 1 line
+        public void writeIntArrayWithSpaces(
+                int[] nums)
+                throws IOException {
+            for (int i = 0; i < nums.length; i++) {
+                writer.write(nums[i] + " ");
+            }
+            writer.newLine();
+            writer.flush();
+        }
+
+        // Function to write a Integer
+        // of array without spaces
+        // in 1 line
+        public void writeIntArrayWithoutSpaces(int[] nums)
+                throws IOException {
+            for (int i = 0;
+                 i < nums.length; i++) {
+                writer.write(
+                        Integer.toString(
+                                nums[i]));
+            }
+            writer.newLine();
+            writer.flush();
+        }
+
+        // Function to write a String
+        public void writeString(String s)
+                throws IOException {
+            writer.write(s);
+            writer.newLine();
+            writer.flush();
         }
     }
 
 }
 
-/*
-for (int i = 0; i < n; i++)
-    {
-        cin >> arr[i];
-        if (arr[i] > maxi1)
-        {
-            maxi2 = maxi1;
-            maxi1 = arr[i];
-        }
-        else if (arr[i] > maxi2)
-        {
-            maxi2 = arr[i];
-        }
-    }
- */

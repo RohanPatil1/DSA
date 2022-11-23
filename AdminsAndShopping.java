@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.StringTokenizer;
 
-public class CFTemplate {
+public class AdminsAndShopping {
+    //https://www.codechef.com/submit/ADMINSHOP
 
     // Driver Code
     public static void main(String[] args)
@@ -16,31 +17,36 @@ public class CFTemplate {
         // Initialize the writer
         FastWriter writer = new FastWriter();
 
-        // Your Code here
-
         // Reads a single integer
         int T = reader.readSingleInt();
 
         while (T-- > 0) {
-            int n = reader.readSingleInt();
 
-            // Reads a array of N number in a line
-            int[] arr = reader.readIntArray(n);
+            // Reads
+            int[] arr = reader.readIntArray(2);
+            int n = arr[0];
+            int people = arr[1];
 
-            //Read String
-            String str = reader.readString();
+            int[] shops = reader.readIntArray(n);
 
-            //PrintArr
-            writer.writeIntArrayWithSpaces(arr);
+            int minPerShop = shops[0];
 
-            // Prints a string
-            writer.writeString(str);
+            for (int shop : shops) {
 
+                int currTime = 0;
+                if (people % shop == 0) {
+                    currTime = people / shop;
+                } else {
+                    currTime = (people / shop) + 1;
+                }
+
+                minPerShop = Math.min(minPerShop, currTime);
+            }
+
+            long ans = Math.max(n, minPerShop);
+            writer.writeSingleLong(ans);
         }
 
-
-        // Prints a single number
-//        writer.writeSingleInteger(sum);
     }
 
     public static void sort(int[] arr) {
@@ -159,6 +165,7 @@ public class CFTemplate {
             writer.newLine();
             writer.flush();
         }
+
 
         // Function to write a single long
         public void writeSingleLong(long i)
