@@ -24,7 +24,8 @@ public class TheHumanoid {
 
             // Reads
             int[] arr = reader.readIntArray(2);
-            int n = arr[0], H = arr[1];
+            int n = arr[0];
+            long H = arr[1];
             int[] powers = reader.readIntArray(n);
 
             sort(powers);
@@ -44,27 +45,27 @@ public class TheHumanoid {
         }
     }
 
-    public static int getMaxCount(int[] powers, int[] gbPowers, int h) {
-        int j = 0, count = 0;
+    public static int getMaxCount(int[] powers, int[] gbPowers, long h) {
+        int maxCount = 0;
+        int j = 0;
         for (int power : powers) {
-            if (power < h) {
-                h += (power / 2);
-                count++;
-            } else {
+            if (h <= power) {
                 if (j == 3) break;
-                while (j < 3 && h <= power) {
+                while (h <= power) {
+                    if (j == 3) break;
                     h *= gbPowers[j];
                     j++;
                 }
-                if (h <= power) {
-                    break;
-                } else {
-                    h += (power / 2);
-                    count++;
-                }
+                if(h<=power) break;
             }
+
+            if (h > power) {
+                maxCount++;
+                h += (power / 2);
+            }
+
         }
-        return count;
+        return maxCount;
     }
 
     public static void sort(int[] arr) {
