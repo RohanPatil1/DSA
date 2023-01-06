@@ -82,7 +82,7 @@ public class Practice {
 
     // MERGE SORT
 
-    public static void merge(int[] arr, int si, int ei) {
+    public static void mergeTwoSortedList(int[] arr, int si, int ei) {
         int size = ei - si + 1;
         int mid = (si + ei) / 2;
         int[] tempArr = new int[size];
@@ -91,7 +91,7 @@ public class Practice {
         int j = mid + 1;
         int k = 0;
 
-        if (i <= mid && j <= ei) {
+        while (i <= mid && j <= ei) {
             if (arr[i] < arr[j]) {
                 tempArr[k] = arr[i];
                 i++;
@@ -129,14 +129,32 @@ public class Practice {
         if (si >= ei) {
             return;
         }
-
         int mid = (si + ei) / 2;
         mergeSort(arr, si, mid);
         mergeSort(arr, mid + 1, ei);
 
-        merge(arr, si, ei);
+        mergeTwoSortedList(arr, si, ei);
 
     }
+
+        /*
+            [4, 3, 1, 19,2, 10]
+
+              si = 0     ei = 5      int mid = 5/2= 2.5 = 2
+
+
+           arr1 = si to mid
+           arr2 = mid+1 to ei
+
+            [1, 3, 4]  [2, 10, 19]
+                i mid       j  ei
+
+            //GOAL = 1,2,3,4,10,19
+
+           mergeTwoSortedList()=> [1, 2, 3, 4, 10, 19]
+         */
+
+
 
     // MERGE SORT END
 
